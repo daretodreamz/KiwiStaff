@@ -98,6 +98,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttendanceManager\AttendanceManager.cs" />
+    <Compile Include="Booking_Manager\BookingManager.cs" />
+    <Compile Include="Deleting_a_child\ChildrenManagement.cs" />
     <Compile Include="Deleting_a_parent\ParentManagementPage.cs" />
     <Compile Include="Login\LoginPage.cs" />
     <Compile Include="Login\LogOut.cs" />

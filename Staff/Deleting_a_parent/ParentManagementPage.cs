@@ -24,25 +24,9 @@ namespace AimyTest.Deleting_a_parent
 
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
-        private IJavaScriptExecutor executor = Utilities.Common.driver as IJavaScriptExecutor;
-
         static private string sURL;
 
-        // Dropdown List of 'Parents'
-        [FindsBy(How = How.XPath, Using = ".//*[@id='menuitem-parents']/a")]
-        public IWebElement ddlParents { get; set; }
-
-        // Link of 'Parent Management'
-        [FindsBy(How = How.XPath, Using = ".//*[@id='menuitem-parents']/ul/li[1]/a")]
-        public IWebElement lnkParentManagement { get; set; }
-
-        // Textbox Category: Start Typing
-        [FindsBy(How = How.Id, Using = "category")]
-        public IWebElement txtCategory { get; set; }
-
-        //DropDown List of 'PROFILE'
-        //[FindsBy(How = How.CssSelector, Using = "span.caret.split-dropdown-caret")]
-        //public IWebElement dllProfile { get; set; }
+       
 
         // 'Archive' item of DropDown List 
         [FindsBy(How = How.LinkText, Using = "ARCHIVE")]
@@ -55,12 +39,12 @@ namespace AimyTest.Deleting_a_parent
 
         public bool TitleValidationExpectNagetive(IWebDriver driver, string TestName, string sTitle)
         {
-            log.Info("TitleValidation Test Case: ");
+            log.Info("Parents Mangement Validation Test Case: ");
 
             if (driver.Title == sTitle)
             {
                 log.Info("[PASS] " + TestName);
-                log.Info("driver.Title: " + driver.Title + " sTitle: " + sTitle);
+                log.Info("driver.Title: " + "'" + driver.Title + "'" + " sTitle: " + "'" + sTitle + "'");
                 return true;
             }
             log.Info("[FAIL] " + TestName);
@@ -69,12 +53,12 @@ namespace AimyTest.Deleting_a_parent
         }
 
 
-        public void AchiveParentWithoutChildren(IWebDriver driver)
+        public bool AchiveParent(IWebDriver driver, string ParentName, string ParentLoginEmail)
         {
             sURL = Utilities.GlobalVariable.sURL + "Parent/Management";
             driver.Navigate().GoToUrl(sURL);
 
-            Utilities.Common.TitleValidation(Utilities.Common.driver, "AchiveParentWithoutChildren",
+            Utilities.Common.TitleValidation(Utilities.Common.driver, "AchiveParent",
                 "Parent Management - aimy plus");
 
 
@@ -83,10 +67,10 @@ namespace AimyTest.Deleting_a_parent
 
             IWebElement txtCategory = WebDriverExtensions.FindElement(driver, By.Id("category"), 2);
 
-            AimySendKeys(txtCategory, "Nakkala, Ravito");
+            AimySendKeys(txtCategory, ParentName);
 
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(500));
             wait.PollingInterval = TimeSpan.FromSeconds(2);
             wait.Until(ExpectedConditions.ElementExists(By.CssSelector("span.caret.split-dropdown-caret")));
 
@@ -110,11 +94,11 @@ namespace AimyTest.Deleting_a_parent
             Common.driver.Navigate().GoToUrl(GlobalVariable.sURL);
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             var pgLogin = new LoginPage();
-            pgLogin.LoginAimy(Common.driver, "ravito@yahoo.co.in", GlobalVariable.sloginPassword);
+            pgLogin.LoginAimy(Common.driver, ParentLoginEmail, GlobalVariable.sloginPassword);
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            var ActualResutl = TitleValidationExpectNagetive(Utilities.Common.driver, "AchiveParentWithoutChildren",
+            var ActualResutl = TitleValidationExpectNagetive(Utilities.Common.driver, "AchiveParent",
                 "Login - AIMY");
-            Assert.AreEqual(true, ActualResutl);
+            return ActualResutl;
             
         }
 
