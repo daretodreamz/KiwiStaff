@@ -100,12 +100,13 @@ namespace AimyTest.TestSuits
         public void RES_PARENT_01_Has_No_Children()
         {
             var handle = new ParentManagementPage();
-            //handle.AchiveParent(Common.driver, "Nakkala, Ravito");
-            //Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            handle.GoToAchivePage(Common.driver, "Nakkala, Ravito");
-            Assert.AreEqual(true, handle.FindArchivedParent("Nakkala, Ravito"));
-            handle.RestoreArchivedParent("Nakkala, Ravito");
-            Assert.AreEqual(true, handle.IsParentBeenRestore("Nakkala, Ravito"));
+            handle.AchiveParent(Common.driver, "Nakkala, Ravito");
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            handle.GoToAchivePage(Common.driver);
+            Assert.AreEqual(true, handle.FindArchivedParent("Nakkala"));
+            handle.RestoreArchivedParent("Nakkala");
+            Assert.AreEqual(true, handle.IsParentBeenRestoredFromAchiveList("Nakkala, Ravito"));
+            Assert.AreEqual(true, handle.IsParentBeenRestoredToParentManagePage("Nakkala, Ravito"));
         }
     }
 }
