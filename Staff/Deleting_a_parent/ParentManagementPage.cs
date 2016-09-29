@@ -26,7 +26,7 @@ namespace AimyTest.Deleting_a_parent
 
         static private string sURL;
 
-       
+        //private string ParentName = String.Empty;
 
         // 'Archive' item of DropDown List 
         [FindsBy(How = How.LinkText, Using = "ARCHIVE")]
@@ -36,6 +36,11 @@ namespace AimyTest.Deleting_a_parent
         [FindsBy(How = How.Id, Using = "kiwi-confirm-yes")]
         public IWebElement buttonOK { get; set; }
 
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div[2]/table/tbody/tr/td[3]/b")]
+        public IWebElement archivedParentName { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div[2]/table/tbody/tr[1]/td[7]/a[1]")]
+        public IWebElement lnkRestore { get; set; }
 
         public bool TitleValidationExpectNagetive(IWebDriver driver, string TestName, string sTitle)
         {
@@ -53,7 +58,7 @@ namespace AimyTest.Deleting_a_parent
         }
 
 
-        public bool AchiveParent(IWebDriver driver, string ParentName, string ParentLoginEmail)
+        public void AchiveParent(IWebDriver driver, string ParentName)
         {
             sURL = Utilities.GlobalVariable.sURL + "Parent/Management";
             driver.Navigate().GoToUrl(sURL);
@@ -87,11 +92,17 @@ namespace AimyTest.Deleting_a_parent
             AimyClick(menuItemArchive);
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             AimyClick(buttonOK);
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+        }
+
+        public void LogoutAdminPort()
+        {
             var logout = new LogOut();
-            logout.LogOutAimy(driver);
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            Common.driver.Navigate().GoToUrl(GlobalVariable.sURL);
+            logout.LogOutAimy(Common.driver);
+        }
+
+        public bool LoginParentPortalDefault(IWebDriver driver, string ParentLoginEmail)
+        {
+            driver.Navigate().GoToUrl(GlobalVariable.sURL);
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             var pgLogin = new LoginPage();
             pgLogin.LoginAimy(Common.driver, ParentLoginEmail, GlobalVariable.sloginPassword);
@@ -99,8 +110,72 @@ namespace AimyTest.Deleting_a_parent
             var ActualResutl = TitleValidationExpectNagetive(Utilities.Common.driver, "AchiveParent",
                 "Login - AIMY");
             return ActualResutl;
-            
         }
 
+        public void GoToAchivePage(IWebDriver driver, string ParentName)
+        {
+            sURL = Utilities.GlobalVariable.sURL + "Parent/ParentArchivedPage";
+            driver.Navigate().GoToUrl(sURL);
+
+            Common.TitleValidation(Common.driver, "AchiveParent",
+                "Parent Management - Archived List - aimy plus");
+
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+
+            IWebElement txtCategory = WebDriverExtensions.FindElement(driver, By.Id("category"), 2);
+            AimySendKeys(txtCategory, ParentName);
+        }
+
+        public bool FindArchivedParent(string ParentName)
+        {
+            log.Info("Parent Manager - FindArchivedParentName : Validation Test Case: ");
+
+            try
+            {
+                if (archivedParentName != null && archivedParentName.Displayed)
+                {
+                    bool flag = archivedParentName.Text.Equals(ParentName);
+                }
+            }
+            catch (Exception e)
+            {
+                if (archivedParentName == null)
+                {
+                    log.Info("[FAIL]  '" + ParentName + "' does NOT exist. FAILED!");
+                    return false;
+                }
+            }
+            log.Info("[PASS] '" + ParentName + "' exist. PASSED!");
+            return true;
+        }
+
+        public void RestoreArchivedParent(string ParentName)
+        {
+            AimyClick(lnkRestore);
+            Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            AimyClick(buttonOK);
+        }
+
+        public bool IsParentBeenRestore(string ParentName)
+        {
+            log.Info("Parent Archive Restore Validation Test");
+            IReadOnlyCollection<IWebElement> elements = null;
+            try
+            {
+                elements = WebDriverExtensions.FindElements(Common.driver,
+                    By.LinkText("Restore"),
+                    10);
+            }
+            catch (Exception e)
+            {
+                if (elements == null)
+                {
+                    log.Info("[PASS] We expect that there should NO '" + ParentName + "' been found.");
+                    return true;
+                }
+            }
+            log.Info("[FAIL] There is '" + ParentName + "' which should NOT be!");
+            return false;
+        }
     }
 }
