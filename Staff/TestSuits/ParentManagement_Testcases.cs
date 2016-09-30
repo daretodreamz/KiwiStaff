@@ -3,6 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using AimyTest.Attendance_Manager;
 using AimyTest.Booking_Manager;
+using AimyTest.Booking_Pages;
 using AimyTest.Deleting_a_child;
 using AimyTest.Deleting_a_parent;
 using AimyTest.Login;
@@ -137,16 +138,10 @@ namespace AimyTest.TestSuits
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
 
             var pdb = new ParentDashBoard();
-            var step1 = pdb.DoBookingForChild();
-            var step2 = step1.StepsForBookingWizard1();
-            var step3 = step2.StepsForBookingWizard2();
-            var step4 = step3.StepsForBookingWizard3();
-            var step5 = step4.StepsForBookingWizard4();
-            var step6 = step5.StepsForBookingWizard5();
-            var step7 = step6.StepsForBookingWizard6();
-            var step8 = step7.StepsForBookingWizard7();
-            var final = step8.StepsForBookingWizard8();
+            pdb.DoBookingForChild();
 
+            var bookings = new Bookings();
+            bool final = bookings.BookingWizard();
             Assert.AreEqual(true, final);
         }
 
@@ -173,18 +168,11 @@ namespace AimyTest.TestSuits
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
 
             var pdb = new ParentDashBoard();
-            var step1 = pdb.DoBookingForChild();
-            var step2 = step1.StepsForBookingWizard1();
-            var step3 = step2.StepsForBookingWizard2();
-            var step4 = step3.StepsForBookingWizard3();
-            var step5 = step4.StepsForBookingWizard4();
-            var step6 = step5.StepsForBookingWizard5();
-            var step7 = step6.StepsForBookingWizard6();
-            var step8 = step7.StepsForBookingWizard7();
-            var final = step8.StepsForBookingWizard8();
+            pdb.DoBookingForChild();
 
+            var bookings = new Bookings();
+            bool final = bookings.BookingWizard();
             Assert.AreEqual(true, final);
-            
         }
 
         //Cleanup data
@@ -197,16 +185,69 @@ namespace AimyTest.TestSuits
                 //click on Cancel the entire book button
                 Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
                 Common.driver.FindElement(
-                    By.XPath(
-                        "html/body/div[3]/div[3]/div[1]/div/div/div[2]/table/tbody/tr[2]/td[2]/div/table/tbody/tr[3]/td[28]/div/input[5]")).Click();
+                        By.XPath(
+                            "html/body/div[3]/div[3]/div[1]/div/div/div[2]/table/tbody/tr[2]/td[2]/div/table/tbody/tr[3]/td[28]/div/input[5]"), 10)
+                    .Click();
                 Thread.Sleep(2000);
                 //click on OK button on warning dialog
                 Common.driver.FindElement(By.XPath("html/body/div[10]/div/div/div[3]/button")).Click();
                 Thread.Sleep(2000);
                 //click on OK button on confirmation dialog
                 Common.driver.FindElement(By.XPath("html/body/div[10]/div/div/div[3]/button[1]")).Click();
-                
+
             }
+        }
+
+        [Test]
+        public void RES_PARENT_04_Has_Some_Children_Has_Some_Bookings_Do_Booking()
+        {
+            var handle = new ParentManagementPage();
+            handle.AchiveParent(Common.driver, "ema su");
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            handle.GoToAchivePage(Common.driver);
+            Assert.AreEqual(true, handle.FindArchivedParent("ema su"));
+            handle.RestoreArchivedParent("ema su");
+            Assert.AreEqual(true, handle.IsParentBeenRestoredFromAchiveList("ema su"));
+            Assert.AreEqual(true, handle.IsParentBeenRestoredToParentManagePage("ema su"));
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            handle.LogoutAdminPort();
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            // Try to login to the restored parent account
+            Assert.AreEqual(true, handle.LoginParentPortalDefault(Common.driver, "ema@gmail.com"));
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+
+            var pdb = new ParentDashBoard();
+            pdb.DoBookingForChild();
+
+            var bookings = new Bookings();
+            bool final = bookings.BookingWizard();
+            Assert.AreEqual(true, final);
+        }
+
+        [Test]
+        public void RES_PARENT_05_Has_Some_Children_Has_Some_Invoices_Do_Booking()
+        {
+            var handle = new ParentManagementPage();
+            handle.AchiveParent(Common.driver, "Attendance B, Hana");
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            handle.GoToAchivePage(Common.driver);
+            Assert.AreEqual(true, handle.FindArchivedParent("Attendance B, Hana"));
+            handle.RestoreArchivedParent("Attendance B, Hana");
+            Assert.AreEqual(true, handle.IsParentBeenRestoredFromAchiveList("Attendance B, Hana"));
+            Assert.AreEqual(true, handle.IsParentBeenRestoredToParentManagePage("Attendance B, Hana"));
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            handle.LogoutAdminPort();
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            // Try to login to the restored parent account
+            Assert.AreEqual(true, handle.LoginParentPortalDefault(Common.driver, "dfaf1bb4-0@delete.auto.com"));
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+
+            var pdb = new ParentDashBoard();
+            pdb.DoBookingForChild();
+
+            var bookings = new Bookings();
+            bool final = bookings.BookingWizard();
+            Assert.AreEqual(true, final);
         }
     }
 }

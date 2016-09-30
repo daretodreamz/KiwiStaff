@@ -128,8 +128,8 @@ namespace AimyTest.Deleting_a_parent
         {
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(500));
-            wait.PollingInterval = TimeSpan.FromSeconds(1);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
+            wait.PollingInterval = TimeSpan.FromSeconds(2);
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("html/body/div[3]/div[2]/a[3]")));
             driver.FindElement(By.XPath("html/body/div[3]/div[2]/a[3]")).Click();
 
@@ -186,7 +186,7 @@ namespace AimyTest.Deleting_a_parent
             {
                 elements = WebDriverExtensions.FindElements(Common.driver,
                     By.LinkText("Restore"),
-                    10);
+                    5);
             }
             catch (Exception e)
             {

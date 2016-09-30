@@ -26,11 +26,10 @@ namespace AimyTest.Parent_Dashboard
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div/div/div[1]/div[1]/div[2]/div[2]/a")]
         public IWebElement btnMakeBooking { get; set; }
 
-        public BookingPages_Wizard1 DoBookingForChild()
+        public void DoBookingForChild()
         {
             AimyClick(btnMakeBooking);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            return new BookingPages_Wizard1();
         }
     }
 }

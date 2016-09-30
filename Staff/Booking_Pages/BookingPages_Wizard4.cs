@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AimyTest.Utilities;
 using OpenQA.Selenium.Support.PageObjects;
@@ -37,11 +38,12 @@ namespace AimyTest.Booking_Pages
         public BookingPages_Wizard5 StepsForBookingWizard4()
         {
             // need to wait for the page fully loaded
-            IWait<IWebDriver> wait = new WebDriverWait(Common.driver, TimeSpan.FromMilliseconds(3000));
+            IWait<IWebDriver> wait = new WebDriverWait(Common.driver, TimeSpan.FromSeconds(5));
+            wait.PollingInterval = TimeSpan.FromSeconds(2);
             wait.Until(drv => ((IJavaScriptExecutor)drv).ExecuteScript("return document.readyState").Equals("complete"));
             Actions action = new Actions(Common.driver);
             action.DragAndDrop(sourceElement, destinationElement).Build().Perform();
-            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            Thread.Sleep(3000);
             AimyClick(btnProceed);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             return new BookingPages_Wizard5();

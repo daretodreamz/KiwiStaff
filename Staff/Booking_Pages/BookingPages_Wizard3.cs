@@ -8,6 +8,7 @@ using AimyTest.Utilities;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Booking_Pages
 {
@@ -33,7 +34,7 @@ namespace AimyTest.Booking_Pages
         {
             System.Drawing.Point point = ((RemoteWebElement)Common.driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
         }
-
+        
         public BookingPages_Wizard4 StepsForBookingWizard3()
         {
             AimyClick(btnRegularBooking);
