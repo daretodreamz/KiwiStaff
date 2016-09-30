@@ -37,7 +37,7 @@ namespace AimyTest.Booking_Manager
         //[FindsBy(How = How.LinkText, Using = "Tony Casson")]
         //public IWebElement lnkChild2 { get; set; }
 
-        private bool ValidationBooking(IWebDriver driver, string TestName, string ChildName)
+        private bool ValidationBooking(IWebDriver driver, string TestName, string Name)
         {
             log.Info("Booking Manager Validation Test Case: ");
 
@@ -47,7 +47,7 @@ namespace AimyTest.Booking_Manager
             try
             {
                 elements = WebDriverExtensions.FindElements(driver,
-                    By.LinkText(ChildName),
+                    By.LinkText(Name),
                     10);
             }
             catch (Exception e)
@@ -55,16 +55,16 @@ namespace AimyTest.Booking_Manager
                 if (elements == null)
                 {
                     log.Info("[FAIL] " + TestName);
-                    log.Info("'" + ChildName + "' does NOT exist under " + TestName + ". FAILED!");
+                    log.Info("'" + Name + "' does NOT exist under " + TestName + ". FAILED!");
                     return false;
                 }
             }
             log.Info("[PASS] " + TestName);
-            log.Info("The child '" + ChildName + "' exist under " + TestName + ". PASSED!");
+            log.Info("The child '" + Name + "' exist under " + TestName + ". PASSED!");
             return true;
         }
 
-        public bool ValidationPendingBookingExist(IWebDriver driver, string ChildName)
+        public bool ValidationPendingBookingExist(IWebDriver driver, string Name)
         {
             sURL = Utilities.GlobalVariable.sURL + "Finance/RedirectType?type=BookingConfirmation";
             driver.Navigate().GoToUrl(sURL);
@@ -72,7 +72,7 @@ namespace AimyTest.Booking_Manager
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
 
             bool exist = ValidationBooking(Utilities.Common.driver, "BookingManager - Pending Booking Checking",
-                ChildName);
+                Name);
             return exist;            
         }
 

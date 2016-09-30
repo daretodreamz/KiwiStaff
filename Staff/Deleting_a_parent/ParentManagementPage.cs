@@ -96,7 +96,7 @@ namespace AimyTest.Deleting_a_parent
             }
             Thread.Sleep(2000);
             AimyClick(menuItemArchive);
-            Thread.Sleep(5000);
+            Thread.Sleep(2000);
             AimyClick(buttonOK);
         }
 
@@ -106,15 +106,21 @@ namespace AimyTest.Deleting_a_parent
             logout.LogOutAimy(Common.driver);
         }
 
-        public bool LoginParentPortalDefault(IWebDriver driver, string ParentLoginEmail)
+        public bool LoginParentPortalDefault(IWebDriver driver, string ParentLoginEmail, bool LoginFlag = true)
         {
+            bool ActualResutl = false;
             driver.Navigate().GoToUrl(GlobalVariable.sURL);
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             var pgLogin = new LoginPage();
             pgLogin.LoginAimy(Common.driver, ParentLoginEmail, GlobalVariable.sloginPassword);
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            var ActualResutl = TitleValidationExpectNagetive(Utilities.Common.driver, "AchiveParent",
-                "Login - AIMY");
+            if (LoginFlag.Equals(false))
+            {
+                ActualResutl = TitleValidationExpectNagetive(Utilities.Common.driver, "AchiveParent",
+                    "Login - AIMY");
+                return ActualResutl;
+            }
+            ActualResutl = Common.driver.FindElement(By.XPath("html/body/div[3]/div/h2")).Text.Equals("Dashboard");
             return ActualResutl;
         }
 

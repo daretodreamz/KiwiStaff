@@ -21,11 +21,11 @@ namespace AimyTest.Login
 
          public void LogOutAimy(IWebDriver driver)
         {
-            WebDriverWait wait = new WebDriverWait(Utilities.Common.driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Utilities.Common.driver, TimeSpan.FromSeconds(15));
             // User menu Dropdown with Hover mouse
             // Actions builder = new Actions(driver);
             wait.PollingInterval = TimeSpan.FromSeconds(2);
-            wait.Until(ExpectedConditions.ElementExists(By.LinkText("Hi Automation")));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("html/body/nav/div/div[2]/ul[2]/li[1]/a[1]")));
             AimyClick(driver.FindElement(By.LinkText("Hi Automation")));
             wait.Until(ExpectedConditions.ElementToBeClickable(MnLogOut));
             AimyClick(MnLogOut);
