@@ -249,6 +249,12 @@ namespace AimyTest.TestSuits
             bool final = bookings.BookingWizard();
             Assert.AreEqual(true, final);
         }
+
+        [Test]
+        public void PARENT_MGT_UNLOCK_01()
+        {
+
+        }
     }
 }
 
