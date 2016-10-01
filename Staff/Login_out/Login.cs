@@ -4,20 +4,13 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 
-namespace AimyTest.Login
+namespace AimyTest.Login_out
 
 {
-    public class LoginPage : MyElelment
+    public class Login : MyElelment
     {
-            public LoginPage()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-
-        }
-
         string script, textYouWant, expectedText;
-        IJavaScriptExecutor executor = Utilities.Common.driver as IJavaScriptExecutor;
-
+        
         // User name textbox
         [FindsBy(How = How.Id, Using = "inputUserName")]
         public IWebElement txtUserName { get; set; }
@@ -38,7 +31,7 @@ namespace AimyTest.Login
         // Login Method
         public void LoginAimy(IWebDriver driver, string userName, string password)
         { 
-            Utilities.Common.TitleValidation(Utilities.Common.driver, "Title of Login Page Validation", "Login - AIMY");
+            Utilities.Common.TitleValidation(driver, "Title of Login Page Validation", "Login - AIMY");
 
             EnterData(driver, userName, password);
 
@@ -54,13 +47,13 @@ namespace AimyTest.Login
         }
         public void ChangingWorkingSite(IWebDriver driver, string sSite)
         {
-            WebDriverWait wait = new WebDriverWait(Utilities.Common.driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
             Actions action = new Actions(driver);
             // selecting for a working site
             // Open to dialog to enter the site
 
-            AimyClick(driver.FindElement(By.XPath("/html/body/nav/div/div[2]/ul[2]/li[2]/span")));
+            AimyClick(driver, driver.FindElement(By.XPath("/html/body/nav/div/div[2]/ul[2]/li[2]/span")));
 
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iMediumWait);
 
@@ -83,7 +76,7 @@ namespace AimyTest.Login
             //$("#currentSite span").text()
 
             Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iMediumWait);
-
+            
             var executor = driver as IJavaScriptExecutor;
             string currentSite = (string)executor.ExecuteScript("return $('#currentSite span').text(); ");
             currentSite = currentSite.TrimStart();
@@ -98,15 +91,15 @@ namespace AimyTest.Login
 
         public int EnterData(IWebDriver driver, string userName, string password)
         {
-            WebDriverWait wait = new WebDriverWait(Utilities.Common.driver, TimeSpan.FromSeconds(Utilities.GlobalVariable.iShortWait));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Utilities.GlobalVariable.iShortWait));
             try
             {
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnLogin));
 
-                AimySendKeys(txtUserName, userName);
-                AimySendKeys(txtPassword, password);
+                AimySendKeys(driver, txtUserName, userName);
+                AimySendKeys(driver, txtPassword, password);
 
-                AimyClick(btnLogin);
+                AimyClick(driver, btnLogin);
             }
             catch (Exception e)
             {
@@ -124,16 +117,18 @@ namespace AimyTest.Login
             EnterData(driver, userName, password);
 
             script = "return $('span[for= UserName]').text();";
+
+            var executor = driver as IJavaScriptExecutor;
             textYouWant = (string)executor.ExecuteScript(script);
             expectedText = Utilities.ExcelLib.ReadData(2, "ErrMsg");
 
-            Utilities.Common.PrintResult(textYouWant, expectedText, TestDescription, "", true, textYouWant.Equals(expectedText));
+            Utilities.Common.PrintResult(driver, textYouWant, expectedText, TestDescription, "", true, textYouWant.Equals(expectedText));
 
             script = "return $('span[for= Password]').text();";
             textYouWant = (string)executor.ExecuteScript(script);
             expectedText = Utilities.ExcelLib.ReadData(3, "ErrMsg");
 
-            Utilities.Common.PrintResult(textYouWant, expectedText, TestDescription, "", true, textYouWant.Equals(expectedText));
+            Utilities.Common.PrintResult(driver, textYouWant, expectedText, TestDescription, "", true, textYouWant.Equals(expectedText));
 
 
         }
@@ -144,10 +139,12 @@ namespace AimyTest.Login
             EnterData(driver, userName, password);
             // verify for the message required password
             script = "return $('span[for= UserName]').text();";
+
+            var executor = driver as IJavaScriptExecutor;
             textYouWant = (string)executor.ExecuteScript(script);
             expectedText = Utilities.ExcelLib.ReadData(2, "ErrMsg");
 
-            Utilities.Common.PrintResult(textYouWant, expectedText, TestDescription, "", true, textYouWant.Equals(expectedText));
+            Utilities.Common.PrintResult(driver, textYouWant, expectedText, TestDescription, "", true, textYouWant.Equals(expectedText));
 
         }
        
@@ -156,10 +153,12 @@ namespace AimyTest.Login
         {
             EnterData(driver, userName, password);
             script = "return  $('span[for= Password]').text();";
+
+            var executor = driver as IJavaScriptExecutor;
             textYouWant = (string)executor.ExecuteScript(script);
             expectedText = Utilities.ExcelLib.ReadData(3, "ErrMsg");
 
-            Utilities.Common.PrintResult(textYouWant, expectedText, TestDescription, "", true, textYouWant.Equals(expectedText));
+            Utilities.Common.PrintResult(driver, textYouWant, expectedText, TestDescription, "", true, textYouWant.Equals(expectedText));
 
         }
         
@@ -167,15 +166,18 @@ namespace AimyTest.Login
         public void TC_INVALID_LOGIN_004(IWebDriver driver, string userName, string password, string TestDescription)
         {
             EnterData(driver, userName, password);
-        
-                // verify for the message for failure login
-                // Text displayed with CR => failure to comparing
-                script = "return $('.validation-summary-errors').text();";
-                textYouWant = (string)executor.ExecuteScript(script);
-                expectedText = Utilities.ExcelLib.ReadData(4, "ErrMsg");
 
-                Utilities.Common.PrintResult(textYouWant, expectedText, TestDescription, "", true, textYouWant.Contains(expectedText));
-            
+            // verify for the message for failure login
+            // Text displayed with CR => failure to comparing
+            script = "return $('.validation-summary-errors').text();";
+
+            var executor = driver as IJavaScriptExecutor;
+            textYouWant = (string) executor.ExecuteScript(script);
+            expectedText = Utilities.ExcelLib.ReadData(4, "ErrMsg");
+
+            Utilities.Common.PrintResult(driver, textYouWant, expectedText, TestDescription, "", true,
+                textYouWant.Contains(expectedText));
+
         }
 
         public Int16 FillDataAndCheck(IWebDriver driver, string userName, string password, string TestDescription)
@@ -205,11 +207,11 @@ namespace AimyTest.Login
                 else // both of them are not null
 
                 {
-                    Utilities.Common.driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(200));
-                    var a = Utilities.Common.TitleValidation(Utilities.Common.driver, "Title of Dashboard Page Validation", "Dashboard - aimy plus");
+                    driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(200));
+                    var a = Utilities.Common.TitleValidation(driver, "Title of Dashboard Page Validation", "Dashboard - aimy plus");
                     if (a == 0) // login sucess
                     {
-                        Utilities.Common.TakeScreenShot(TestDescription);
+                        Utilities.Common.TakeScreenShot(driver, TestDescription);
                         log.Info(TestDescription + " Login successful, Username/Pass: " + userName + " , " + password);
                     }
                     else

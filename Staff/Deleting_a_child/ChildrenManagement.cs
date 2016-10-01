@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AimyTest.Login;
+using AimyTest.Login_out;
 using AimyTest.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -11,13 +11,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Deleting_a_child
 {
-    class ChildrenManagement : MyElelment
+    public class ChildrenManagement : MyElelment
     {
-
-        public ChildrenManagement()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
 
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
@@ -25,11 +20,11 @@ namespace AimyTest.Deleting_a_child
 
         // 'Archive' item of DropDown List 
         [FindsBy(How = How.LinkText, Using = "ARCHIVE")]
-        public IWebElement menuItemArchive { get; set; }
+        private IWebElement menuItemArchive { get; set; }
 
         // 'OK' button of Confirm Dialog 
         [FindsBy(How = How.Id, Using = "archive-exclude-parent")]
-        public IWebElement buttonNO { get; set; }
+        private IWebElement buttonNO { get; set; }
 
         private bool ValidationChildAchive(IWebDriver driver, string TestName)
         {
@@ -57,18 +52,18 @@ namespace AimyTest.Deleting_a_child
 
         public bool AchiveChildren(IWebDriver driver, string ChildName)
         {
-            sURL = Utilities.GlobalVariable.sURL + "Parent/ChildManagement";
+            sURL = GlobalVariable.sURL + "Parent/ChildManagement";
             driver.Navigate().GoToUrl(sURL);
 
-            Utilities.Common.TitleValidation(Utilities.Common.driver, "AchiveChildren",
+            Common.TitleValidation(driver, "AchiveChildren",
                 "Child Management - aimy plus");
 
 
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
 
             IWebElement txtCategory = WebDriverExtensions.FindElement(driver, By.Id("category"), 2);
 
-            AimySendKeys(txtCategory, ChildName);
+            AimySendKeys(driver, txtCategory, ChildName);
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.PollingInterval = TimeSpan.FromSeconds(2);
@@ -83,15 +78,15 @@ namespace AimyTest.Deleting_a_child
                 break;
             }
 
-            AimyClick(menuItemArchive);
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            AimyClick(buttonNO);
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            AimyClick(driver, menuItemArchive);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            AimyClick(driver, buttonNO);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
             driver.Navigate().GoToUrl(sURL);
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            AimySendKeys(WebDriverExtensions.FindElement(driver, By.Id("category"), 2), ChildName);
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            bool actuResult = ValidationChildAchive(Utilities.Common.driver, "AchiveChildren");
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            AimySendKeys(driver, WebDriverExtensions.FindElement(driver, By.Id("category"), 2), ChildName);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            bool actuResult = ValidationChildAchive(driver, "AchiveChildren");
             return actuResult;
         }
     }

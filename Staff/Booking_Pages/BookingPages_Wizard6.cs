@@ -11,29 +11,26 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Booking_Pages
 {
-    class BookingPages_Wizard6 : MyElelment
+    public class BookingPages_Wizard6 : MyElelment
     {
-        public BookingPages_Wizard6()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
+        
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         // select one of the children
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div/div[3]/div/div/div[4]/button[2]")]
-        public IWebElement btnNext { get; set; }
+        private IWebElement btnNext { get; set; }
 
-        private void DoScrollTo(By by)
+        private void DoScrollTo(IWebDriver driver, By by)
         {
-            System.Drawing.Point point = ((RemoteWebElement)Common.driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
+            System.Drawing.Point point = ((RemoteWebElement)driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
         }
 
-        public BookingPages_Wizard7 StepsForBookingWizard6()
+        public BookingPages_Wizard7 StepsForBookingWizard6(IWebDriver driver)
         {
             // need wait for the page fully loaded
-            IWait<IWebDriver> wait = new WebDriverWait(Common.driver, TimeSpan.FromMilliseconds(3000));
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(3000));
             wait.Until(drv => ((IJavaScriptExecutor)drv).ExecuteScript("return document.readyState").Equals("complete"));
-            AimyClick(btnNext); 
+            AimyClick(driver, btnNext); 
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             return new BookingPages_Wizard7();
         }

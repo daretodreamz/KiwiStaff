@@ -4,15 +4,15 @@ using System;
 
 namespace AimyTest
 {
-    public class MyElelment:MyChecking
+    public class MyElelment : MyChecking
     {
         public static readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
-        public static bool IsElementPresent(By by)
+        public static bool IsElementPresent(IWebDriver driver, By by)
         {
             try
             {
-                Utilities.Common.driver.FindElement(by);
+                driver.FindElement(by);
                 return true;
             }
             catch (NoSuchElementException)
@@ -21,20 +21,20 @@ namespace AimyTest
             }
         }
         /// <param name="timeoutInSeconds"></param>
-        public void WaitForElementLoad(By by, int timeoutInSeconds)
+        public void WaitForElementLoad(IWebDriver driver, By by, int timeoutInSeconds)
         {
             // Create an “Explicit” wait to this driver:
             if (timeoutInSeconds > 0)
             {
-                WebDriverWait wait = new WebDriverWait(Utilities.Common.driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
                 wait.Until(ExpectedConditions.ElementIsVisible(by));
             }
         }
 
 
-        public static void AimySendKeys(IWebElement element, string sText)
+        public static void AimySendKeys(IWebDriver driver, IWebElement element, string sText)
         {
-            WebDriverWait wait = new WebDriverWait(Utilities.Common.driver, TimeSpan.FromSeconds(Utilities.GlobalVariable.iShortWait));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Utilities.GlobalVariable.iShortWait));
             try
 
             {
@@ -61,9 +61,9 @@ namespace AimyTest
 
 
 
-        public static void AimyClick(IWebElement element)
+        public static void AimyClick(IWebDriver driver, IWebElement element)
         {
-            WebDriverWait wait = new WebDriverWait(Utilities.Common.driver, TimeSpan.FromSeconds(Utilities.GlobalVariable.iShortWait));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Utilities.GlobalVariable.iShortWait));
             try
 
             {

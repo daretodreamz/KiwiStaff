@@ -10,24 +10,19 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Booking_Manager
 {
-    class BookingManager : MyElelment
+    public class BookingManager : MyElelment
     {
-        public BookingManager()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
-
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         static private string sURL;
 
         // 'Select All Terms' checkbox
         [FindsBy(How = How.Id, Using = "all-terms-toggle")]
-        public IWebElement chkAllTerms { get; set; }
+        private IWebElement chkAllTerms { get; set; }
 
         // 'CONFIRMED BOOKING' pane
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[3]/ul/li[2]/a")]
-        public IWebElement lnkConfirmedBooking { get; set; }
+        private IWebElement lnkConfirmedBooking { get; set; }
 
         //// Child 'Marlon Casson' under Pending Bookings
         //[FindsBy(How = How.LinkText, Using = "Marlon Casson")]
@@ -41,7 +36,7 @@ namespace AimyTest.Booking_Manager
         {
             log.Info("Booking Manager Validation Test Case: ");
 
-            AimyClick(chkAllTerms);
+            AimyClick(driver, chkAllTerms);
 
             IReadOnlyCollection<IWebElement> elements = null;
             try
@@ -66,28 +61,28 @@ namespace AimyTest.Booking_Manager
 
         public bool ValidationPendingBookingExist(IWebDriver driver, string Name)
         {
-            sURL = Utilities.GlobalVariable.sURL + "Finance/RedirectType?type=BookingConfirmation";
+            sURL = GlobalVariable.sURL + "Finance/RedirectType?type=BookingConfirmation";
             driver.Navigate().GoToUrl(sURL);
 
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
 
-            bool exist = ValidationBooking(Utilities.Common.driver, "BookingManager - Pending Booking Checking",
+            bool exist = ValidationBooking(driver, "BookingManager - Pending Booking Checking",
                 Name);
             return exist;            
         }
 
         public bool ValidationConfirmedBookingExist(IWebDriver driver, string ChildName)
         {
-            sURL = Utilities.GlobalVariable.sURL + "Finance/RedirectType?type=BookingConfirmation";
+            sURL = GlobalVariable.sURL + "Finance/RedirectType?type=BookingConfirmation";
             driver.Navigate().GoToUrl(sURL);
 
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
 
-            AimyClick(lnkConfirmedBooking);
+            AimyClick(driver, lnkConfirmedBooking);
 
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
 
-            bool exist = ValidationBooking(Utilities.Common.driver, "BookingManager - Confirmed Booking Checking",
+            bool exist = ValidationBooking(driver, "BookingManager - Confirmed Booking Checking",
                 ChildName);
             return exist;
         }

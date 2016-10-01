@@ -11,23 +11,23 @@ namespace AimyTest
 {
     public class MyChecking
     {
-        public static IWebDriver driver { get; set; }
+        //public static IWebDriver driver { get; set; }
 
         private static readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         public static string script, ActualText, expectedText, TestDescription;
 
        
-        public bool Verify_ParentName(string sscript, string sExpectedText1)
+        public bool Verify_ParentName(IWebDriver driver, string sscript, string sExpectedText1)
         {
-            var executor = Utilities.Common.driver as IJavaScriptExecutor;
+            var executor = driver as IJavaScriptExecutor;
 
             string ActualText = (string)executor.ExecuteScript(sscript);
 
             if (!ActualText.Contains(sExpectedText1)) // wrong Parent name display
             {
                 log.Error("[Fail] to compare Text as expected");
-                Utilities.Common.TakeScreenShot("FAIL- REG_PARENT_02 Registering a new second parent");
+                Utilities.Common.TakeScreenShot(driver, "FAIL- REG_PARENT_02 Registering a new second parent");
                 log.Debug("ActualText: " + ActualText);
                 log.Debug("expectedText: " + sExpectedText1);
                 return false;
@@ -44,9 +44,9 @@ namespace AimyTest
         /// <param name="sExpectedText3"></param>
         /// <param name="sExpectedText4"></param>
         /// <returns></returns>
-        public bool Verify_ParentChildInfo(string sscript, string sExpectedText1, string sExpectedText2, string sExpectedText3, string sExpectedText4)
+        public bool Verify_ParentChildInfo(IWebDriver driver, string sscript, string sExpectedText1, string sExpectedText2, string sExpectedText3, string sExpectedText4)
         {
-            var executor = Utilities.Common.driver as IJavaScriptExecutor;
+            var executor = driver as IJavaScriptExecutor;
 
             string ActualText = (string)executor.ExecuteScript(sscript);
 
@@ -89,7 +89,7 @@ namespace AimyTest
             }
             else log.Debug("[PASS] Comparing for " + sExpectedText4);
 
-            Utilities.Common.TakeScreenShot("Verify Profile Info displayed");
+            Utilities.Common.TakeScreenShot(driver, "Verify Profile Info displayed");
 
             return true;
         }

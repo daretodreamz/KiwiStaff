@@ -12,44 +12,41 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Booking_Pages
 {
-    class BookingPages_Wizard1 : MyElelment
+    public class BookingPages_Wizard1 : MyElelment
     {
-        public BookingPages_Wizard1()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
+        
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         // select one of the children
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div/div[1]/div/div[2]/label[1]")]
-        public IWebElement lblChild1 { get; set; }
+        private IWebElement lblChild1 { get; set; }
 
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div/div[2]/div/div[2]/div/span")]
-        public IWebElement lblProgrammesVenue { get; set; }
+        private IWebElement lblProgrammesVenue { get; set; }
 
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[5]/div/div/div[2]/div[1]/div/div/a[1]")]
-        public IWebElement lblSiteName { get; set; }
+        private IWebElement lblSiteName { get; set; }
 
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[5]/div/div/div[3]/button[2]")]
-        public IWebElement btnOK { get; set; }
+        private IWebElement btnOK { get; set; }
 
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div/div[5]/button")]
-        public IWebElement btnNext { get; set; }
+        private IWebElement btnNext { get; set; }
 
-        private void DoScrollTo(By by)
+        private void DoScrollTo(IWebDriver driver, By by)
         {
-            System.Drawing.Point point = ((RemoteWebElement)Common.driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
+            System.Drawing.Point point = ((RemoteWebElement)driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
         }
 
-        private bool IsFirstChildSelected()
+        private bool IsFirstChildSelected(IWebDriver driver)
         {
             IWebElement element = null;
             try
             {
-                WebDriverWait wait = new WebDriverWait(Common.driver, TimeSpan.FromSeconds(5));
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
                 wait.PollingInterval = TimeSpan.FromSeconds(2);
                 wait.Until(ExpectedConditions.ElementExists(By.XPath("html/body/div[3]/div[2]/div/div[1]/div/div[2]/label[1]/img")));
-                element = Common.driver.FindElement(By.XPath("html/body/div[3]/div[2]/div/div[1]/div/div[2]/label[1]/img"));
+                element = driver.FindElement(By.XPath("html/body/div[3]/div[2]/div/div[1]/div/div[2]/label[1]/img"));
                                                               
             }
             catch (Exception e)
@@ -68,17 +65,17 @@ namespace AimyTest.Booking_Pages
             return true;
         }
 
-        private IWebElement FindAutomationSite()
+        private IWebElement FindAutomationSite(IWebDriver driver)
         {
             //html/body/div[3]/div[5]/div/div/div[2]/div[1]/div/div/a
             IReadOnlyCollection<IWebElement> elements = null;
             try
             {
-                IWait<IWebDriver> wait = new WebDriverWait(Common.driver, TimeSpan.FromSeconds(5));
+                IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
                 wait.PollingInterval = TimeSpan.FromSeconds(2);
                 wait.Until(
                     ExpectedConditions.ElementExists(By.XPath("html/body/div[3]/div[5]/div/div/div[2]/div[1]/div/div/a")));
-                elements = Common.driver.FindElements(By.XPath("html/body/div[3]/div[5]/div/div/div[2]/div[1]/div/div/a"));
+                elements = driver.FindElements(By.XPath("html/body/div[3]/div[5]/div/div/div[2]/div[1]/div/div/a"));
                 if (elements != null)
                 {
                     foreach (var element in elements)
@@ -97,22 +94,22 @@ namespace AimyTest.Booking_Pages
             return null;
         }
 
-        public BookingPages_Wizard2 StepsForBookingWizard1()
+        public BookingPages_Wizard2 StepsForBookingWizard1(IWebDriver driver)
         {
-            if(!IsFirstChildSelected())
+            if(!IsFirstChildSelected(driver))
             {
-                AimyClick(lblChild1);
+                AimyClick(driver, lblChild1);
             }
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            AimyClick(lblProgrammesVenue);
+            AimyClick(driver, lblProgrammesVenue);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            AimyClick(FindAutomationSite());
+            AimyClick(driver, FindAutomationSite(driver));
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            DoScrollTo(By.XPath("html/body/div[3]/div[5]/div/div/div[3]/button[2]"));
+            DoScrollTo(driver, By.XPath("html/body/div[3]/div[5]/div/div/div[3]/button[2]"));
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            AimyClick(btnOK);
+            AimyClick(driver, btnOK);
             Thread.Sleep(2000);
-            AimyClick(btnNext);
+            AimyClick(driver, btnNext);
             return new BookingPages_Wizard2();
         }
     }

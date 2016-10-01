@@ -9,13 +9,8 @@ using AimyTest.Utilities;
 
 namespace AimyTest.Attendance_Manager
 {
-    class AttendanceManager : MyElelment
+    public class AttendanceManager : MyElelment
     {
-        public AttendanceManager()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
-
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         static private string sURL;
@@ -27,11 +22,11 @@ namespace AimyTest.Attendance_Manager
 
         // Pick a term
         [FindsBy(How = How.XPath, Using = "html/body/div[7]/div/ul/li[6]")]
-        public IWebElement ddlTerm3 { get; set; }
+        private IWebElement ddlTerm3 { get; set; }
 
         // ChildName
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[7]/div[2]/table/tbody/tr/td[5]")]
-        public IWebElement txtChildName { get; set; }
+        private IWebElement txtChildName { get; set; }
 
         private bool ValidationAttendance(IWebDriver driver, string TestName, string ChildName)
         {
@@ -60,28 +55,28 @@ namespace AimyTest.Attendance_Manager
 
         public bool ValidationAttendanceExist(IWebDriver driver, string ChildName)
         {
-            sURL = Utilities.GlobalVariable.sURL + "RollSheet/AttendanceManager";
+            sURL = GlobalVariable.sURL + "RollSheet/AttendanceManager";
             driver.Navigate().GoToUrl(sURL);
 
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
 
-            IReadOnlyCollection<IWebElement> selectors = WebDriverExtensions.FindElements(Common.driver,
+            IReadOnlyCollection<IWebElement> selectors = WebDriverExtensions.FindElements(driver,
                 By.XPath("html/body/div[3]/div[5]/span[1]/span/span[2]/span"), 10);
             if (selectors.Count != 0)
             {
                 foreach (var selector in selectors)
                 {
-                    AimyClick(selector);
+                    AimyClick(driver, selector);
                     break;
                 }
             }
            
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            AimyClick(ddlTerm3);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            AimyClick(driver, ddlTerm3);
 
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
 
-            bool exist = ValidationAttendance(Utilities.Common.driver, "AttendanceManager - Attendance Checking",
+            bool exist = ValidationAttendance(driver, "AttendanceManager - Attendance Checking",
                 ChildName);
             return exist;
         }

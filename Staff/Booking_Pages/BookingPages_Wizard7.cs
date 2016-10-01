@@ -11,31 +11,28 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Booking_Pages
 {
-    class BookingPages_Wizard7 : MyElelment
+    public class BookingPages_Wizard7 : MyElelment
     {
-        public BookingPages_Wizard7()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
+        
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         // select one of the children
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div/div[4]/div/div[1]/div[4]/button[2]")]
-        public IWebElement btnFinish { get; set; }
+        private IWebElement btnFinish { get; set; }
 
-        private void DoScrollTo(By by)
+        private void DoScrollTo(IWebDriver driver, By by)
         {
-            System.Drawing.Point point = ((RemoteWebElement)Common.driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
+            System.Drawing.Point point = ((RemoteWebElement)driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
         }
 
-        public BookingPages_Wizard8 StepsForBookingWizard7()
+        public BookingPages_Wizard8 StepsForBookingWizard7(IWebDriver driver)
         {
             // need to wait for the page fully loaded
-            IWait<IWebDriver> wait = new WebDriverWait(Common.driver, TimeSpan.FromMilliseconds(3000));
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(3000));
             wait.Until(drv => ((IJavaScriptExecutor)drv).ExecuteScript("return document.readyState").Equals("complete"));
-            DoScrollTo(By.XPath("html/body/div[3]/div[4]/div/div[4]/div/div[1]/div[4]/button[2]"));
+            DoScrollTo(driver, By.XPath("html/body/div[3]/div[4]/div/div[4]/div/div[1]/div[4]/button[2]"));
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            AimyClick(btnFinish);
+            AimyClick(driver, btnFinish);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             return  new BookingPages_Wizard8();
         }

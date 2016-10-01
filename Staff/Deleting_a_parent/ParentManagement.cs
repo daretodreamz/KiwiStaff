@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AimyTest.Login;
+using AimyTest.Login_out;
 using AimyTest.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium.Support.PageObjects;
@@ -15,13 +15,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Deleting_a_parent
 {
-    class ParentManagementPage : MyElelment
+    public class ParentManagement : MyElelment
     {
-        public ParentManagementPage()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
-
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         static private string sURL;
@@ -30,23 +25,23 @@ namespace AimyTest.Deleting_a_parent
 
         // 'Archive' item of DropDown List 
         [FindsBy(How = How.LinkText, Using = "ARCHIVE")]
-        public IWebElement menuItemArchive { get; set; }
+        private IWebElement menuItemArchive { get; set; }
 
         // 'OK' button of Confirm Dialog 
         [FindsBy(How = How.Id, Using = "kiwi-confirm-yes")]
-        public IWebElement buttonOK { get; set; }
+        private IWebElement buttonOK { get; set; }
                                            
         // locate the archived parent name on Archive Page             
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div[2]/table/tbody/tr/td[3]/b")]
-        public IWebElement archivedParentName { get; set; }
+        private IWebElement archivedParentName { get; set; }
         
         // locate the restored parent name on Parent management page
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[3]/div[2]/table/tbody/tr[1]/td[3]/div/p[1]/b")]
-        public IWebElement restoredParentName { get; set; }
+        private IWebElement restoredParentName { get; set; }
 
         // locate 'RESTORE' link button
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div[2]/table/tbody/tr[1]/td[7]/a[1]")]
-        public IWebElement lnkRestore { get; set; }
+        private IWebElement lnkRestore { get; set; }
 
         //
         public bool TitleValidationExpectNagetive(IWebDriver driver, string TestName, string sTitle)
@@ -70,7 +65,7 @@ namespace AimyTest.Deleting_a_parent
             sURL = Utilities.GlobalVariable.sURL + "Parent/Management";
             driver.Navigate().GoToUrl(sURL);
 
-            Utilities.Common.TitleValidation(Utilities.Common.driver, "AchiveParent",
+            Utilities.Common.TitleValidation(driver, "AchiveParent",
                 "Parent Management - aimy plus");
 
 
@@ -79,7 +74,7 @@ namespace AimyTest.Deleting_a_parent
 
             IWebElement txtCategory = WebDriverExtensions.FindElement(driver, By.Id("category"), 2);
 
-            AimySendKeys(txtCategory, ParentName);
+            AimySendKeys(driver, txtCategory, ParentName);
             txtCategory.SendKeys(Keys.Enter);
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(500));
@@ -95,58 +90,56 @@ namespace AimyTest.Deleting_a_parent
                 break;
             }
             Thread.Sleep(2000);
-            AimyClick(menuItemArchive);
+            AimyClick(driver, menuItemArchive);
             Thread.Sleep(2000);
-            AimyClick(buttonOK);
+            AimyClick(driver, buttonOK);
         }
 
-        public void LogoutAdminPort()
+        public void LogoutAdminPort(IWebDriver driver)
         {
-            var logout = new LogOut();
-            logout.LogOutAimy(Common.driver);
+            Pages.LogOutPage.LogOutAimy(driver);
         }
 
         public bool LoginParentPortalDefault(IWebDriver driver, string ParentLoginEmail, bool LoginFlag = true)
         {
             bool ActualResutl = false;
             driver.Navigate().GoToUrl(GlobalVariable.sURL);
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            var pgLogin = new LoginPage();
-            pgLogin.LoginAimy(Common.driver, ParentLoginEmail, GlobalVariable.sloginPassword);
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Pages.LoginPage.LoginAimy(driver, ParentLoginEmail, GlobalVariable.sloginPassword);
+            Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             if (LoginFlag.Equals(false))
             {
-                ActualResutl = TitleValidationExpectNagetive(Utilities.Common.driver, "AchiveParent",
+                ActualResutl = TitleValidationExpectNagetive(driver, "AchiveParent",
                     "Login - AIMY");
                 return ActualResutl;
             }
-            ActualResutl = Common.driver.FindElement(By.XPath("html/body/div[3]/div/h2")).Text.Equals("Dashboard");
+            ActualResutl = driver.FindElement(By.XPath("html/body/div[3]/div/h2")).Text.Equals("Dashboard");
             return ActualResutl;
         }
 
         public void GoToAchivePage(IWebDriver driver)
         {
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
             
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
             wait.PollingInterval = TimeSpan.FromSeconds(2);
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("html/body/div[3]/div[2]/a[3]")));
             driver.FindElement(By.XPath("html/body/div[3]/div[2]/a[3]")).Click();
 
-            Common.TitleValidation(Common.driver, "AchiveParent",
+            Common.TitleValidation(driver, "AchiveParent",
                 "Parent Management - Archived List - aimy plus");
 
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
 
 
         }
 
-        public bool FindArchivedParent(string ParentName)
+        public bool FindArchivedParent(IWebDriver driver, string ParentName)
         {
             log.Info("Parent Manager - FindArchivedParentName : Validation Test Case: ");
-            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            IWebElement txtCategory = WebDriverExtensions.FindElement(Common.driver, By.Id("category"), 2);
-            AimySendKeys(txtCategory, ParentName);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            IWebElement txtCategory = WebDriverExtensions.FindElement(driver, By.Id("category"), 2);
+            AimySendKeys(driver, txtCategory, ParentName);
             txtCategory.SendKeys(Keys.Enter);
 
 
@@ -169,22 +162,22 @@ namespace AimyTest.Deleting_a_parent
             return true;
         }
 
-        public void RestoreArchivedParent(string ParentName)
+        public void RestoreArchivedParent(IWebDriver driver, string ParentName)
         {
             Thread.Sleep(2000);
-            AimyClick(lnkRestore);
+            AimyClick(driver, lnkRestore);
             Thread.Sleep(2000);
-            AimyClick(buttonOK);
+            AimyClick(driver, buttonOK);
         }
 
-        public bool IsParentBeenRestoredFromAchiveList(string ParentName)
+        public bool IsParentBeenRestoredFromAchiveList(IWebDriver driver, string ParentName)
         {
             log.Info("Parent Archive Restore Validation Test");
 
             IReadOnlyCollection<IWebElement> elements = null;
             try
             {
-                elements = WebDriverExtensions.FindElements(Common.driver,
+                elements = WebDriverExtensions.FindElements(driver,
                     By.LinkText("Restore"),
                     5);
             }
@@ -200,22 +193,22 @@ namespace AimyTest.Deleting_a_parent
             return false;
         }
 
-        public bool IsParentBeenRestoredToParentManagePage(string ParentName)
+        public bool IsParentBeenRestoredToParentManagePage(IWebDriver driver, string ParentName)
         {
             log.Info("Parent Archive Restore Validation Test");
-            Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            sURL = Utilities.GlobalVariable.sURL + "Parent/Management";
-            Common.driver.Navigate().GoToUrl(sURL);
-            Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            IWebElement txtCategory = WebDriverExtensions.FindElement(Common.driver, By.Id("category"), 2);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            sURL = GlobalVariable.sURL + "Parent/Management";
+            driver.Navigate().GoToUrl(sURL);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            IWebElement txtCategory = WebDriverExtensions.FindElement(driver, By.Id("category"), 2);
 
-            AimySendKeys(txtCategory, ParentName);
+            AimySendKeys(driver, txtCategory, ParentName);
             txtCategory.SendKeys(Keys.Enter);
             Thread.Sleep(2000);
             IReadOnlyCollection<IWebElement> elements = null;
             try
             {
-                elements = WebDriverExtensions.FindElements(Common.driver,
+                elements = WebDriverExtensions.FindElements(driver,
                     By.XPath("html/body/div[3]/div[3]/div[2]/table/tbody/tr[1]/td[3]/div/p[1]/b"),
                     10);
             }

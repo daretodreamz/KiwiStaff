@@ -11,24 +11,19 @@ using AimyTest.Booking_Pages;
 
 namespace AimyTest.Parent_Dashboard
 {
-    class ParentDashBoard : MyElelment
+    public class ParentDashBoard : MyElelment
     {
-        public ParentDashBoard()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
-
-        private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
+       private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         static private string sURL;
 
         // 'Select All Terms' checkbox
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div/div/div[1]/div[1]/div[2]/div[2]/a")]
-        public IWebElement btnMakeBooking { get; set; }
+        private IWebElement btnMakeBooking { get; set; }
 
-        public void DoBookingForChild()
+        public void DoBookingForChild(IWebDriver driver)
         {
-            AimyClick(btnMakeBooking);
+            AimyClick(driver, btnMakeBooking);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
         }
     }

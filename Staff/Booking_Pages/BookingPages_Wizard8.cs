@@ -11,41 +11,38 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Booking_Pages
 {
-    class BookingPages_Wizard8 : MyElelment
+    public class BookingPages_Wizard8 : MyElelment
     {
-        public BookingPages_Wizard8()
-        {
-            PageFactory.InitElements(Utilities.Common.driver, this);
-        }
+       
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div[4]/a")]
-        public IWebElement btnBackToDashBoard { get; set; }
+        private IWebElement btnBackToDashBoard { get; set; }
 
        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div/div/div[2]/div[3]/div/div[2]/div/div[3]/table/tbody/tr[2]/td[8]")]
-        public IWebElement elePending { get; set; }
+        private IWebElement elePending { get; set; }
 
 
-        private void DoScrollTo(By by)
+        private void DoScrollTo(IWebDriver driver, By by)
         {
-            System.Drawing.Point point = ((RemoteWebElement)Common.driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
+            System.Drawing.Point point = ((RemoteWebElement)driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
         }
 
-        public bool StepsForBookingWizard8()
+        public bool StepsForBookingWizard8(IWebDriver driver)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            AimyClick(btnBackToDashBoard);
+            AimyClick(driver, btnBackToDashBoard);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            return ValidateDashBoard(); 
+            return ValidateDashBoard(driver); 
         }
 
-        private bool ValidateDashBoard()
+        private bool ValidateDashBoard(IWebDriver driver)
         {
-            WebDriverWait wait = new WebDriverWait(Common.driver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.PollingInterval = TimeSpan.FromSeconds(2);
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("html/body/div[3]/div/div/div[2]/div[3]/div/div[2]/div/div[3]/table/tbody/tr[2]/td[8]")));
 
-            IWebElement ele = Common.driver.FindElement(
+            IWebElement ele = driver.FindElement(
                 By.XPath("html/body/div[3]/div/div/div[2]/div[3]/div/div[2]/div/div[3]/table/tbody/tr[2]/td[8]"));
 
             if (ele != null)

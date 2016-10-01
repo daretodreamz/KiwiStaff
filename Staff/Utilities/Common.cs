@@ -14,9 +14,9 @@ namespace AimyTest.Utilities
     /// </summary>
     public class Common
     {
-
+        
         // Auto element properties  IWebDriver driver
-        public static IWebDriver driver { get; set; }
+        //public static IWebDriver driver { get; set; }
         public static readonly log4net.ILog log = LogHelper.GetLogger();
 
 
@@ -28,7 +28,7 @@ namespace AimyTest.Utilities
 
         public static Screenshot Screen;
 
-        public static void TakeScreenShot(string ss)
+        public static void TakeScreenShot(IWebDriver driver, string ss)
         {
             WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             try
@@ -53,7 +53,7 @@ namespace AimyTest.Utilities
                 System.IO.Directory.CreateDirectory(sFolder);
         }
 
-        public static bool IsElementPresent(By by)
+        public static bool IsElementPresent(IWebDriver driver, By by)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace AimyTest.Utilities
         /// <param name="TestStepDesc"></param>
         /// <param name="TestCase"></param>
         /// <param name="result"></param>
-        public static void PrintResult(string Actual, string Expected, string TestCaseDescription, string TestStepDesc, bool TestCase, bool result)
+        public static void PrintResult(IWebDriver driver, string Actual, string Expected, string TestCaseDescription, string TestStepDesc, bool TestCase, bool result)
         {
             string Desc;
 
@@ -125,7 +125,7 @@ namespace AimyTest.Utilities
 
             }
 
-            TakeScreenShot(TestCaseDescription + TestStepDesc);
+            TakeScreenShot(driver, TestCaseDescription + TestStepDesc);
             if (result == false) // fail to compare
             {
               
@@ -138,18 +138,18 @@ namespace AimyTest.Utilities
           
         }
 
-        public static string GetObjectID()
+        public static string GetObjectID(IWebDriver driver)
         {
-            var executor = Common.driver as IJavaScriptExecutor;
+            var executor = driver as IJavaScriptExecutor;
 
             string parentId = (string)executor.ExecuteScript("return document.URL.substring(document.URL.lastIndexOf('=')+1)");
             Console.WriteLine("ID has been created: " + parentId);
             return parentId;
 
         }
-        public static string GetParentID()
+        public static string GetParentID(IWebDriver driver)
         {
-            var executor = Common.driver as IJavaScriptExecutor;
+            var executor = driver as IJavaScriptExecutor;
 
             string parentId = (string)executor.ExecuteScript("return document.URL.substring(document.URL.lastIndexOf('/')+1)");
             Console.WriteLine("ID has been created: " + parentId);
@@ -162,7 +162,7 @@ namespace AimyTest.Utilities
         /// </summary>
         /// <param name="by"></param>
         /// <param name="timeoutInSeconds"></param>
-        public static void WaitForElementLoad(By by, int timeoutInSeconds)
+        public static void WaitForElementLoad(IWebDriver driver, By by, int timeoutInSeconds)
         {
             // Create an “Explicit” wait to this driver:
             if (timeoutInSeconds > 0)
@@ -235,7 +235,7 @@ namespace AimyTest.Utilities
         /// <param name="SchoolName"></param>
         public static void SelectSchoolName_frmPopUp(IWebDriver driver, string SchoolName)
         {
-            var executor = Common.driver as IJavaScriptExecutor;
+            var executor = driver as IJavaScriptExecutor;
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(GlobalVariable.iLongWait));
             WaitBySleeping(GlobalVariable.iMediumWait);
@@ -270,7 +270,7 @@ namespace AimyTest.Utilities
         /* Before calling this method, plz make sure to click the target DDL                   */
         /* as Kendo UI DDL dynamically creates option lists when it is clicked                 */
         /***************************************************************************************/
-        public static bool SelectKendoDDLByIndex(int value, string ddlPath)
+        public static bool SelectKendoDDLByIndex(IWebDriver driver, int value, string ddlPath)
         {
             bool found = false;
 
@@ -316,7 +316,7 @@ namespace AimyTest.Utilities
         /* This method takes Xpath to a Kendo Spin Control and a value to be entered           */
         /* It increments value by clicking "Increment Button"                                  */
         /***************************************************************************************/
-        public static void IcrementKendoSpinCtrl(string value, string spnPath)
+        public static void IcrementKendoSpinCtrl(IWebDriver driver, string value, string spnPath)
         {
             if ((value.Equals(null)) || (spnPath.Equals(null)))
             {
@@ -374,7 +374,7 @@ namespace AimyTest.Utilities
         /* Before calling this method, plz make sure to click the target DDL                                                */
         /* as Kendo UI DDL dynamically creates option lists when it is clicked                                              */
         /********************************************************************************************************************/
-        public static bool SelectKendoDDLByTextValue(string value, string ddlPath)
+        public static bool SelectKendoDDLByTextValue(IWebDriver driver, string value, string ddlPath)
         {
             bool found = false;
 
@@ -428,7 +428,7 @@ namespace AimyTest.Utilities
         //******************************* Added by Kathy ****************************************/
         //* This method explicitly makes a driver wait until a target element becomes clickable */
         //***************************************************************************************/
-        public static void WaitForElementClickable(By by, int timeoutInSeconds)
+        public static void WaitForElementClickable(IWebDriver driver, By by, int timeoutInSeconds)
         {
             if ((timeoutInSeconds <= 0) || (by.Equals(null)))
             {
