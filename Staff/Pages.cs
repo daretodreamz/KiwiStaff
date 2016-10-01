@@ -63,30 +63,37 @@ namespace AimyTest
         {
             get { return GetPage<BookingPages_Wizard1>(); }
         }
+
         public static BookingPages_Wizard2 BookingPagesWizard2
         {
             get { return GetPage<BookingPages_Wizard2>(); }
         }
+
         public static BookingPages_Wizard3 BookingPagesWizard3
         {
             get { return GetPage<BookingPages_Wizard3>(); }
         }
+
         public static BookingPages_Wizard4 BookingPagesWizard4
         {
             get { return GetPage<BookingPages_Wizard4>(); }
         }
+
         public static BookingPages_Wizard5 BookingPagesWizard5
         {
             get { return GetPage<BookingPages_Wizard5>(); }
         }
+
         public static BookingPages_Wizard6 BookingPagesWizard6
         {
             get { return GetPage<BookingPages_Wizard6>(); }
         }
+
         public static BookingPages_Wizard7 BookingPagesWizard7
         {
             get { return GetPage<BookingPages_Wizard7>(); }
         }
+
         public static BookingPages_Wizard8 BookingPagesWizard8
         {
             get { return GetPage<BookingPages_Wizard8>(); }
