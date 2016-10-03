@@ -114,6 +114,7 @@
     <Compile Include="Browsers\IEBrowser.cs" />
     <Compile Include="Deleting_a_child\ChildrenManagement.cs" />
     <Compile Include="Deleting_a_parent\ParentManagement.cs" />
+    <Compile Include="EditLogin\EditLogin.cs" />
     <Compile Include="Login_out\Login.cs" />
     <Compile Include="Login_out\LogOut.cs" />
     <Compile Include="MyChecking.cs" />

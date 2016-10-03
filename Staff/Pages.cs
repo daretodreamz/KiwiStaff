@@ -11,6 +11,7 @@ using AimyTest.Deleting_a_child;
 using AimyTest.Deleting_a_parent;
 using AimyTest.Login_out;
 using AimyTest.Parent_Dashboard;
+using AimyTest.Edit_Login;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace AimyTest
@@ -102,6 +103,11 @@ namespace AimyTest
         public static ParentDashBoard ParentDashBoardPage
         {
             get { return GetPage<ParentDashBoard>(); }
+        }
+
+        public static EditLogin EditLoginPage
+        {
+            get { return GetPage<EditLogin>(); }
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AimyTest.Login_out;
 using AimyTest.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium.Support.PageObjects;
@@ -27,14 +25,22 @@ namespace AimyTest.Deleting_a_parent
         [FindsBy(How = How.LinkText, Using = "ARCHIVE")]
         private IWebElement menuItemArchive { get; set; }
 
+        // 'Unlock' item of DropDown List 
+        [FindsBy(How = How.LinkText, Using = "UNLOCK")]
+        private IWebElement menuItemUnlock { get; set; }
+
+        // 'EDIT LOGIN' item of DropDown List 
+        [FindsBy(How = How.LinkText, Using = "EDIT LOGIN")]
+        private IWebElement menuItemEditLogin { get; set; }
+
         // 'OK' button of Confirm Dialog 
         [FindsBy(How = How.Id, Using = "kiwi-confirm-yes")]
         private IWebElement buttonOK { get; set; }
-                                           
+
         // locate the archived parent name on Archive Page             
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div[2]/table/tbody/tr/td[3]/b")]
         private IWebElement archivedParentName { get; set; }
-        
+
         // locate the restored parent name on Parent management page
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[3]/div[2]/table/tbody/tr[1]/td[3]/div/p[1]/b")]
         private IWebElement restoredParentName { get; set; }
@@ -100,12 +106,21 @@ namespace AimyTest.Deleting_a_parent
             Pages.LogOutPage.LogOutAimy(driver);
         }
 
-        public bool LoginParentPortalDefault(IWebDriver driver, string ParentLoginEmail, bool LoginFlag = true)
+        public bool LoginParentPortalDefault(IWebDriver driver, string ParentLoginEmail, bool LoginFlag = true, string NewPassword = "12341234")
         {
             bool ActualResutl = false;
             driver.Navigate().GoToUrl(GlobalVariable.sURL);
             Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            Pages.LoginPage.LoginAimy(driver, ParentLoginEmail, GlobalVariable.sloginPassword);
+            if (String.IsNullOrEmpty(NewPassword))
+            {
+                
+                Pages.LoginPage.LoginAimy(driver, ParentLoginEmail, GlobalVariable.sloginPassword);
+            }
+            else
+            {
+                Pages.LoginPage.LoginAimy(driver, ParentLoginEmail, NewPassword);
+            }
+            
             Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             if (LoginFlag.Equals(false))
             {
@@ -120,7 +135,7 @@ namespace AimyTest.Deleting_a_parent
         public void GoToAchivePage(IWebDriver driver)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            
+
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
             wait.PollingInterval = TimeSpan.FromSeconds(2);
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("html/body/div[3]/div[2]/a[3]")));
@@ -134,7 +149,7 @@ namespace AimyTest.Deleting_a_parent
 
         }
 
-        public bool FindArchivedParent(IWebDriver driver, string ParentName)
+        public bool FindTheParent(IWebDriver driver, string ParentName)
         {
             log.Info("Parent Manager - FindArchivedParentName : Validation Test Case: ");
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -222,6 +237,99 @@ namespace AimyTest.Deleting_a_parent
             }
             log.Info("[PASS]: '" + ParentName + "' has been RESTORED!");
             return true;
+        }
+
+        public bool IsParentLocked(IWebDriver driver, string ParentName)
+        {
+            log.Info("Parent Manager - FindTheLockedParent : Validation Test Case: ");
+            
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            IReadOnlyCollection<IWebElement> TableRows = WebDriverExtensions.FindElements(driver,
+                By.XPath("html/body/div[3]/div[3]/div[2]/table/tbody/tr"), 2);
+
+
+            for (int t = 0; t < TableRows.Count; t++)
+            {
+                if (TableRows.ElementAt(t) != null)
+                {
+                    if (!String.IsNullOrEmpty(TableRows.ElementAt(t).GetAttribute("style")))
+                    {
+                       if (TableRows.ElementAt(t).GetAttribute("style").Equals("background-color: rgb(239, 201, 201);"))
+                        {
+                           return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool IsParentUnlocked(IWebDriver driver, string ParentName)
+        {
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            IReadOnlyCollection<IWebElement> TableRows = WebDriverExtensions.FindElements(driver,
+                By.XPath("html/body/div[3]/div[3]/div[2]/table/tbody/tr"), 2);
+
+            for (int t = 0; t < TableRows.Count; t++)
+            {
+                if (TableRows.ElementAt(t) != null)
+                {
+                    if (!String.IsNullOrEmpty(TableRows.ElementAt(t).GetAttribute("style")))
+                    {
+                        if (TableRows.ElementAt(t).GetAttribute("style").Equals("background-color: rgb(239, 201, 201);"))
+                        {
+                            // filter for this parent
+                            IWebElement txtCategory = WebDriverExtensions.FindElement(driver, By.Id("category"), 2);
+
+                            AimySendKeys(driver, txtCategory, ParentName);
+                            txtCategory.SendKeys(Keys.Enter);
+
+                            // locate the 'profile' dropdown list
+                            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(500));
+                            wait.PollingInterval = TimeSpan.FromSeconds(2);
+                            wait.Until(
+                                ExpectedConditions.ElementExists(By.CssSelector("span.caret.split-dropdown-caret")));
+
+                            IReadOnlyCollection<IWebElement> items =
+                                driver.FindElements(By.CssSelector("span.caret.split-dropdown-caret"));
+                            // click on 'profile'dropdown list
+                            foreach (var item in items)
+                            {
+                                item.Click();
+                                break;
+                            }
+
+                            Thread.Sleep(2000);
+                            AimyClick(driver, menuItemUnlock);
+                            Thread.Sleep(2000);
+                            AimyClick(driver, buttonOK);
+
+                            return true;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        public void GoToEditLoginDetailPage(IWebDriver driver, String ParentName)
+        {
+            Utilities.Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(500));
+            wait.PollingInterval = TimeSpan.FromSeconds(2);
+            wait.Until(ExpectedConditions.ElementExists(By.CssSelector("span.caret.split-dropdown-caret")));
+
+            IReadOnlyCollection<IWebElement> items =
+                driver.FindElements(By.CssSelector("span.caret.split-dropdown-caret"));
+
+            foreach (var item in items)
+            {
+                item.Click();
+                break;
+            }
+            Thread.Sleep(2000);
+            AimyClick(driver, menuItemEditLogin);
         }
     }
 }

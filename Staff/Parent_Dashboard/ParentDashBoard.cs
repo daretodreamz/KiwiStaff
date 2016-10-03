@@ -7,7 +7,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using AimyTest.Utilities;
 using OpenQA.Selenium.Remote;
-using AimyTest.Booking_Pages;
 
 namespace AimyTest.Parent_Dashboard
 {

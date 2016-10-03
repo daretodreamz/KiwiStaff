@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
 using System;
 using AimyTest.Browsers;
-using AimyTest.Login_out;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
 
 namespace AimyTest.TestSuits
 {
