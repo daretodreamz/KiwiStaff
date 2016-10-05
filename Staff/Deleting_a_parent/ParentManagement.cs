@@ -39,7 +39,7 @@ namespace AimyTest.Deleting_a_parent
 
         // locate the archived parent name on Archive Page             
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div[2]/table/tbody/tr/td[3]/b")]
-        private IWebElement archivedParentName { get; set; }
+        private IWebElement filteredParentName { get; set; }
 
         // locate the restored parent name on Parent management page
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[3]/div[2]/table/tbody/tr[1]/td[3]/div/p[1]/b")]
@@ -48,6 +48,14 @@ namespace AimyTest.Deleting_a_parent
         // locate 'RESTORE' link button
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div[2]/table/tbody/tr[1]/td[7]/a[1]")]
         private IWebElement lnkRestore { get; set; }
+
+        // 'BOOKING' dropdown list
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[3]/div[2]/table/tbody/tr/td[8]/div/a")]
+        private IWebElement btnBooking { get; set; }
+
+        // 'MAKE BOOKING' dropdown list
+        [FindsBy(How = How.LinkText, Using = "MAKE BOOKING")]
+        private IWebElement ddlMakeBooking { get; set; }
 
         //
         public bool TitleValidationExpectNagetive(IWebDriver driver, string TestName, string sTitle)
@@ -160,14 +168,14 @@ namespace AimyTest.Deleting_a_parent
 
             try
             {
-                if (archivedParentName != null && archivedParentName.Displayed)
+                if (filteredParentName != null && filteredParentName.Displayed)
                 {
-                    bool flag = archivedParentName.Text.Equals(ParentName);
+                    bool flag = filteredParentName.Text.Equals(ParentName);
                 }
             }
             catch (Exception e)
             {
-                if (archivedParentName == null)
+                if (filteredParentName == null)
                 {
                     log.Info("[FAIL]  '" + ParentName + "' does NOT exist. FAILED!");
                     return false;
@@ -330,6 +338,14 @@ namespace AimyTest.Deleting_a_parent
             }
             Thread.Sleep(2000);
             AimyClick(driver, menuItemEditLogin);
+        }
+
+        public void GoToBookingInYourChildPage(IWebDriver driver)
+        {
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            AimyClick(driver, btnBooking);
+            Common.WaitBySleeping(GlobalVariable.iShortWait*2);
+            AimyClick(driver, ddlMakeBooking);
         }
     }
 }

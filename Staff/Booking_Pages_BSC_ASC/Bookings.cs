@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 
-namespace AimyTest.Booking_Pages
+namespace AimyTest.Booking_Pages_BSC_ASC
 {
     public class Bookings
     {

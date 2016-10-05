@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
-namespace AimyTest.Booking_Pages
+namespace AimyTest.Booking_Pages_BSC_ASC
 {
     public class BookingPages_Wizard3 : MyElelment
     {
@@ -31,8 +31,8 @@ namespace AimyTest.Booking_Pages
         {
             System.Drawing.Point point = ((RemoteWebElement)driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
         }
-        
-        public BookingPages_Wizard4 StepsForBookingWizard3(IWebDriver driver)
+
+        public void StepsForBookingWizard3(IWebDriver driver)
         {
             AimyClick(driver, btnRegularBooking);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -41,7 +41,6 @@ namespace AimyTest.Booking_Pages
 
             AimyClick(driver, btnNext);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            return new BookingPages_Wizard4();
         }
     }
 }

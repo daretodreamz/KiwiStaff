@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
-namespace AimyTest.Booking_Pages
+namespace AimyTest.Booking_Pages_BSC_ASC
 {
     public class BookingPages_Wizard1 : MyElelment
     {
@@ -76,7 +76,7 @@ namespace AimyTest.Booking_Pages
                 wait.Until(
                     ExpectedConditions.ElementExists(By.XPath("html/body/div[3]/div[5]/div/div/div[2]/div[1]/div/div/a")));
                 elements = driver.FindElements(By.XPath("html/body/div[3]/div[5]/div/div/div[2]/div[1]/div/div/a"));
-                if (elements != null)
+                if (elements != null)                    
                 {
                     foreach (var element in elements)
                     {

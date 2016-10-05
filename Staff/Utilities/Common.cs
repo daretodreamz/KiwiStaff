@@ -395,8 +395,8 @@ namespace AimyTest.Utilities
                     for (int i = 1; i <= Elements.Count; i++)
                     {
                         // Create a path for each item of DDL and find it
-                        string itemPath = ddlPath + "[" + i + "]";
-                        IWebElement target = driver.FindElement(By.XPath(itemPath));
+                        
+                        IWebElement target = driver.FindElements(By.XPath(ddlPath))[i];
                         if (target.Text == value)
                         {
                             Actions actions = new Actions(driver);

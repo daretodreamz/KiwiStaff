@@ -7,10 +7,11 @@ using AimyTest.Utilities;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 
-namespace AimyTest.Booking_Pages
+namespace AimyTest.Booking_Pages_BSC_ASC
 {
-    public class BookingPages_Wizard5 : MyElelment
+    public class BookingPages_Wizard6 : MyElelment
     {
         
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
@@ -24,11 +25,14 @@ namespace AimyTest.Booking_Pages
             System.Drawing.Point point = ((RemoteWebElement)driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
         }
 
-        public BookingPages_Wizard6 StepsForBookingWizard5(IWebDriver driver)
+        public BookingPages_Wizard7 StepsForBookingWizard6(IWebDriver driver)
         {
-            AimyClick(driver, btnNext);
+            // need wait for the page fully loaded
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(3000));
+            wait.Until(drv => ((IJavaScriptExecutor)drv).ExecuteScript("return document.readyState").Equals("complete"));
+            AimyClick(driver, btnNext); 
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            return new BookingPages_Wizard6();
+            return new BookingPages_Wizard7();
         }
     }
 }

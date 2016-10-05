@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AimyTest.Attendance_Manager;
 using AimyTest.Booking_Manager;
-using AimyTest.Booking_Pages;
+using AimyTest.Booking_Pages_BSC_ASC;
+using AimyTest.Booking_Pages_Classes;
 using AimyTest.Browsers;
 using AimyTest.Deleting_a_child;
 using AimyTest.Deleting_a_parent;
@@ -108,6 +109,45 @@ namespace AimyTest
         public static EditLogin EditLoginPage
         {
             get { return GetPage<EditLogin>(); }
+        }
+
+        public static ClassBookings ClassBookingPage
+        {
+            get { return GetPage<ClassBookings>(); }
+        }
+        public static ClassBookingPages_Wizard1 ClassBookingPagesWizard1
+        {
+            get { return GetPage<ClassBookingPages_Wizard1>(); }
+        }
+
+        public static ClassBookingPages_Wizard2 ClassBookingPagesWizard2
+        {
+            get { return GetPage<ClassBookingPages_Wizard2>(); }
+        }
+
+        public static ClassBookingPages_Wizard3 ClassBookingPagesWizard3
+        {
+            get { return GetPage<ClassBookingPages_Wizard3>(); }
+        }
+
+        public static ClassBookingPages_Wizard4 ClassBookingPagesWizard4
+        {
+            get { return GetPage<ClassBookingPages_Wizard4>(); }
+        }
+
+        public static ClassBookingPages_Wizard5 ClassBookingPagesWizard5
+        {
+            get { return GetPage<ClassBookingPages_Wizard5>(); }
+        }
+
+        public static ClassBookingPages_Wizard6 ClassBookingPagesWizard6
+        {
+            get { return GetPage<ClassBookingPages_Wizard6>(); }
+        }
+
+        public static ClassBookingPages_Wizard7 ClassBookingPagesWizard7
+        {
+            get { return GetPage<ClassBookingPages_Wizard7>(); }
         }
     }
 }

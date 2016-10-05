@@ -11,7 +11,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
-namespace AimyTest.Booking_Pages
+namespace AimyTest.Booking_Pages_BSC_ASC
 {
     public class BookingPages_Wizard4 : MyElelment
     {
