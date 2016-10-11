@@ -7,6 +7,8 @@ using AimyTest.Attendance_Manager;
 using AimyTest.Booking_Manager;
 using AimyTest.Booking_Pages_BSC_ASC;
 using AimyTest.Booking_Pages_Classes;
+using AimyTest.Booking_Pages_HolidayProgramme;
+using AimyTest.Booking_Pages_SpecialDay;
 using AimyTest.Browsers;
 using AimyTest.Deleting_a_child;
 using AimyTest.Deleting_a_parent;
@@ -148,6 +150,48 @@ namespace AimyTest
         public static ClassBookingPages_Wizard7 ClassBookingPagesWizard7
         {
             get { return GetPage<ClassBookingPages_Wizard7>(); }
+        }
+
+        public static HolidayProgrammeBookings HolidayProgrammeBookingPage
+        {
+            get { return GetPage<HolidayProgrammeBookings>(); }
+        }
+        public static HolidayProgrammeBookingPages_Wizard1 HolidayProgrammeBookingPagesWizard1
+        {
+            get { return GetPage<HolidayProgrammeBookingPages_Wizard1>(); }
+        }
+        public static HolidayProgrammeBookingPages_Wizard2 HolidayProgrammeBookingPagesWizard2
+        {
+            get { return GetPage<HolidayProgrammeBookingPages_Wizard2>(); }
+        }
+        public static HolidayProgrammeBookingPages_Wizard3 HolidayProgrammeBookingPagesWizard3
+        {
+            get { return GetPage<HolidayProgrammeBookingPages_Wizard3>(); }
+        }
+        public static HolidayProgrammeBookingPages_Wizard4 HolidayProgrammeBookingPagesWizard4
+        {
+            get { return GetPage<HolidayProgrammeBookingPages_Wizard4>(); }
+        }
+
+        public static SpecialDayBookings SpecailDayBookingPage
+        {
+            get { return GetPage<SpecialDayBookings>(); }
+        }
+        public static SpecialDayBookingPages_Wizard1 SpecialDayBookingPagesWizard1
+        {
+            get { return GetPage<SpecialDayBookingPages_Wizard1>(); }
+        }
+        public static SpecialDayBookingPages_Wizard2 SpecialDayBookingPagesWizard2
+        {
+            get { return GetPage<SpecialDayBookingPages_Wizard2>(); }
+        }
+        public static SpecialDayBookingPages_Wizard3 SpecialDayBookingPagesWizard3
+        {
+            get { return GetPage<SpecialDayBookingPages_Wizard3>(); }
+        }
+        public static SpecialDayBookingPages_Wizard4 SpecialDayBookingPagesWizard4
+        {
+            get { return GetPage<SpecialDayBookingPages_Wizard4>(); }
         }
     }
 }
