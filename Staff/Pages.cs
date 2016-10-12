@@ -15,7 +15,10 @@ using AimyTest.Deleting_a_parent;
 using AimyTest.Login_out;
 using AimyTest.Parent_Dashboard;
 using AimyTest.Edit_Login;
+using AimyTest.Tablet;
 using AimyTest.Tablet.DriverPickup;
+using AimyTest.Tablet.SignIn;
+using AimyTest.Tablet.SignOut;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace AimyTest
@@ -210,6 +213,30 @@ namespace AimyTest
         public static Edit EditPage
         {
             get { return GetPage<Edit>(); }
+        }
+        public static ChildSignIn ChildSignInPage
+        {
+            get { return GetPage<ChildSignIn>(); }
+        }
+        public static SignInRollCall SignInRollCallPage
+        {
+            get { return GetPage<SignInRollCall>(); }
+        }
+        public static ChildSignOut ChildSignOutPage
+        {
+            get { return GetPage<ChildSignOut>(); }
+        }
+        public static SignYourChildOut SignYourChildOutPage
+        {
+            get { return GetPage<SignYourChildOut>(); }
+        }
+        public static AuthorisedPickupsDialog AuthorisedPickupsDialogPage
+        {
+            get { return GetPage<AuthorisedPickupsDialog>(); }
+        }
+        public static Canvas CanvasPage
+        {
+            get { return GetPage<Canvas>(); }
         }
     }
 }

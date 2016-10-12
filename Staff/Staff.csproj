@@ -144,7 +144,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tablet\DriverPickup\ChildList.cs" />
     <Compile Include="Tablet\DriverPickup\SchoolList.cs" />
-    <Compile Include="Tablet\DriverPickup\Mobile.cs" />
+    <Compile Include="Tablet\Mobile.cs" />
+    <Compile Include="Tablet\SignIn\SignInRollCall.cs" />
+    <Compile Include="Tablet\SignIn\ChildSignIn.cs" />
+    <Compile Include="Tablet\SignOut\AuthorisedPickupsDialog.cs" />
+    <Compile Include="Tablet\SignOut\Canvas.cs" />
+    <Compile Include="Tablet\SignOut\ChildSignOut.cs" />
+    <Compile Include="Tablet\SignOut\SignYourChildOut.cs" />
     <Compile Include="TestSuits\ClassBooking_Testcases.cs" />
     <Compile Include="TestSuits\HolidayProgrammeBooking_Testcases.cs" />
     <Compile Include="TestSuits\ParentManagement_Testcases.cs" />

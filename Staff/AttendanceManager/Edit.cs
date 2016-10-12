@@ -15,7 +15,9 @@ namespace AimyTest.Attendance_Manager
         // statusYes                    
         [FindsBy(How = How.Id, Using = "statusYes")]
         private IWebElement chkStatusYes { get; set; }
-
+        //attendStatusYes
+        [FindsBy(How = How.Id, Using = "attendStatusYes")]
+        private IWebElement chkAttendedStatusYes { get; set; }
         // Cancel Button   html/body/div[17]/div[2]/div/div[2]/a[2]             
         [FindsBy(How = How.XPath, Using = "/html/body/div[13]/div[2]/div/div[2]/a[2]")]
         private IWebElement btnCancel { get; set; }
@@ -23,6 +25,12 @@ namespace AimyTest.Attendance_Manager
         public bool IsChildBeenPickedUp(IWebDriver driver)
         {
             bool flag = chkStatusYes.Selected;
+            return flag;
+        }
+
+        public bool IsChildSignedIn(IWebDriver driver)
+        {
+            bool flag = chkAttendedStatusYes.Selected;
             return flag;
         }
 

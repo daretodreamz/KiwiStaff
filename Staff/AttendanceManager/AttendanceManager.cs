@@ -39,6 +39,16 @@ namespace AimyTest.Attendance_Manager
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[7]/div[2]/table/tbody/tr/td[10]/a[1]")]
         private IWebElement btnEdit { get; set; }
 
+        // AttendedYes
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[7]/div[2]/table/tbody/tr[1]/td[6]/img")]
+        private IWebElement imgAttendedYes { get; set; }
+
+        public bool IsImgAttendedYesGreen(IWebDriver driver)
+        {
+            bool flag = imgAttendedYes.Displayed;
+            return flag;
+        }
+
         public bool InputSearchBox(IWebDriver driver, string childName)
         {
             AimySendKeys(driver, inputSearchBox, childName);
