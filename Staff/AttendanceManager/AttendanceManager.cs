@@ -20,13 +20,36 @@ namespace AimyTest.Attendance_Manager
         //[FindsBy(How = How.XPath, Using = "html/body/div[3]/div[5]/span[1]/span/span[2]/span")]
         //public IWebElement ddlTermSelector { get; set; }
 
-        // Pick a term
+        // Pick term3                     
         [FindsBy(How = How.XPath, Using = "html/body/div[7]/div/ul/li[6]")]
         private IWebElement ddlTerm3 { get; set; }
+        // Pick term4
+        [FindsBy(How = How.XPath, Using = "html/body/div[7]/div/ul/li[8]")]
+        private IWebElement ddlTerm4 { get; set; }
 
         // ChildName
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[7]/div[2]/table/tbody/tr/td[5]")]
         private IWebElement txtChildName { get; set; }
+        
+        // Search Box
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[6]/input[1]")]
+        private IWebElement inputSearchBox { get; set; }
+
+        // EDIT button
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[7]/div[2]/table/tbody/tr/td[10]/a[1]")]
+        private IWebElement btnEdit { get; set; }
+
+        public bool InputSearchBox(IWebDriver driver, string childName)
+        {
+            AimySendKeys(driver, inputSearchBox, childName);
+            return true;
+        }
+
+        public bool ClickOnEditButton(IWebDriver driver)
+        {
+            AimyClick(driver, btnEdit);
+            return true;
+        }
 
         private bool ValidationAttendance(IWebDriver driver, string TestName, string ChildName)
         {
@@ -53,7 +76,7 @@ namespace AimyTest.Attendance_Manager
             return true;
         }
 
-        public bool ValidationAttendanceExist(IWebDriver driver, string ChildName)
+        public bool ValidationAttendanceExist(IWebDriver driver, string whichTerm, string ChildName)
         {
             sURL = GlobalVariable.sURL + "RollSheet/AttendanceManager";
             driver.Navigate().GoToUrl(sURL);
@@ -70,9 +93,12 @@ namespace AimyTest.Attendance_Manager
                     break;
                 }
             }
-           
+
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            AimyClick(driver, ddlTerm3);
+            if (whichTerm.ToLower().Contains("term3"))
+                AimyClick(driver, ddlTerm3);
+            else if (whichTerm.ToLower().Contains("term4"))
+                AimyClick(driver, ddlTerm4);
 
             Common.WaitBySleeping(GlobalVariable.iShortWait);
 

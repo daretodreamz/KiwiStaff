@@ -87,7 +87,7 @@ namespace AimyTest.TestSuits
         public void DEL_CHILD_04_Has_Some_Attendance_Records()
         {
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
-            Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "Tony Casson");
+            Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term3", "Tony Casson");
             Pages.ChildrenManagementPage.AchiveChildren(driver, "Tony Casson");
         }
 

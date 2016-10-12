@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttendanceManager\AttendanceManager.cs" />
+    <Compile Include="AttendanceManager\Edit.cs" />
     <Compile Include="Booking_Manager\BookingManager.cs" />
     <Compile Include="Booking_Pages_BSC_ASC\BookingPages_Wizard8.cs" />
     <Compile Include="Booking_Pages_BSC_ASC\BookingPages_Wizard7.cs" />
@@ -141,9 +142,13 @@
     <Compile Include="Parent_Dashboard\ParentDashBoard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tablet\DriverPickup\ChildList.cs" />
+    <Compile Include="Tablet\DriverPickup\SchoolList.cs" />
+    <Compile Include="Tablet\DriverPickup\Mobile.cs" />
     <Compile Include="TestSuits\ClassBooking_Testcases.cs" />
     <Compile Include="TestSuits\HolidayProgrammeBooking_Testcases.cs" />
     <Compile Include="TestSuits\ParentManagement_Testcases.cs" />
+    <Compile Include="TestSuits\RollCallForProgramme_Testcases.cs" />
     <Compile Include="TestSuits\SpecialDayBooking_Testcases.cs" />
     <Compile Include="TestSuits\TestBase.cs" />
     <Compile Include="Utilities\Common.cs" />

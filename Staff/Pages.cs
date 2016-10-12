@@ -15,6 +15,7 @@ using AimyTest.Deleting_a_parent;
 using AimyTest.Login_out;
 using AimyTest.Parent_Dashboard;
 using AimyTest.Edit_Login;
+using AimyTest.Tablet.DriverPickup;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace AimyTest
@@ -192,6 +193,23 @@ namespace AimyTest
         public static SpecialDayBookingPages_Wizard4 SpecialDayBookingPagesWizard4
         {
             get { return GetPage<SpecialDayBookingPages_Wizard4>(); }
+        }
+
+        public static Mobile MobilePage
+        {
+            get { return GetPage<Mobile>(); }
+        }
+        public static SchoolList SchoolListPage
+        {
+            get { return GetPage<SchoolList>(); }
+        }
+        public static ChildList ChildListPage
+        {
+            get { return GetPage<ChildList>(); }
+        }
+        public static Edit EditPage
+        {
+            get { return GetPage<Edit>(); }
         }
     }
 }
