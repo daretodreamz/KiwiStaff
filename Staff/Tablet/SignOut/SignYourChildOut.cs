@@ -17,11 +17,20 @@ namespace AimyTest.Tablet.SignOut
         [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div/ul/li/div[1]/div[2]/div/a/img")]
         private IWebElement btnGreenTick { get; set; }
 
+        // No Records            
+        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div[1]/h3")]
+        private IWebElement checkPoint { get; set; }
+
         public bool ClickOnGreenTick(IWebDriver driver)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             AimyClick(driver, btnGreenTick);
             return true;
+        }
+
+        public bool CheckNoRecord(IWebDriver driver)
+        {
+            return checkPoint.Text.Equals("No Record For Today");
         }
     }
 }

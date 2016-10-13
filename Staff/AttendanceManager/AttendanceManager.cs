@@ -111,7 +111,7 @@ namespace AimyTest.Attendance_Manager
             return true;
         }
 
-        public bool ValidationAttendacneBeenSignedOut(IWebDriver driver, string ChildName, string AuthedParentName)
+        public bool ValidationAttendacneBeenSignedOut(IWebDriver driver, string ChildName, string AuthedParentName, bool flag = true)
         {
             // First to check the Status of Edit Page
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
@@ -119,15 +119,15 @@ namespace AimyTest.Attendance_Manager
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             ClickOnEditButton(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver, true), "IsChildBeenPickedUp");
-            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver), "IsChildSignedIn");
+            //Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver, true), "IsChildBeenPickedUp");
+            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver, flag), "IsChildSignedIn");
             Assert.AreEqual(true, Pages.EditPage.IsSignOutByAuthedParent(driver, AuthedParentName));
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.EditPage.CloseDialog(driver);
             return true;
         }
 
-        public bool ValidationAttendanceBeenSignedIn(IWebDriver driver, string ChildName)
+        public bool IsAttendanceSignedIn(IWebDriver driver, string ChildName, bool flag = true)
         {
             // First to check the 'Green' tick flag on Attendance Management Page
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
@@ -138,8 +138,8 @@ namespace AimyTest.Attendance_Manager
             // Second to go to 'Edit' page to check the status
             ClickOnEditButton(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver, true), "IsChildBeenPickedUp");
-            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver), "IsChildSignedIn");
+            //Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver, true), "IsChildBeenPickedUp");
+            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver, flag), "IsChildSignedIn");
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.EditPage.CloseDialog(driver);
             //

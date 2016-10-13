@@ -50,15 +50,22 @@ namespace AimyTest.Tablet
             return true;
         }
 
-        public bool ClickOnSignIn(IWebDriver driver)
+        public bool ClickOnSignIn(IWebDriver driver, GreenRedOptions greenRedFlag)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             AimyClick(driver, btnSignIn);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Common.WaitBySleeping(GlobalVariable.iShortWait*20);
             Pages.ChildSignInPage.ClickOnChildSignIn(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.SignInRollCallPage.ClickOnGreenTick(driver);
-            
+            Common.WaitBySleeping(GlobalVariable.iShortWait*20);
+            if (greenRedFlag == GreenRedOptions.Green)
+            {
+                Pages.SignInRollCallPage.ClickOnGreenTick(driver);
+            }
+            else if (greenRedFlag == GreenRedOptions.Red)
+            {
+                Pages.SignInRollCallPage.ClickOnRedTick(driver);
+                Pages.SignInRollCallPage.ChooseOtherReason(driver);
+            }
             return true;
         }
 
@@ -69,6 +76,9 @@ namespace AimyTest.Tablet
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.ChildSignOutPage.ClickOnChildSignOut(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+
+            if (Pages.SignYourChildOutPage.CheckNoRecord(driver))
+                return true;
             Pages.SignYourChildOutPage.ClickOnGreenTick(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.AuthorisedPickupsDialogPage.ClickOnAuthPickup(driver);
