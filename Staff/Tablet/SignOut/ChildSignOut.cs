@@ -17,8 +17,14 @@ namespace AimyTest.Tablet.SignOut
         [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[2]/div[2]/ul/li/a")]
         private IWebElement btnNext { get; set; }
 
+        // Refresh button
+        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div/a/img")]
+        private IWebElement btnRefresh { get; set; }
+
         public bool ClickOnChildSignOut(IWebDriver driver)
         {
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            AimyClick(driver, btnRefresh);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             AimyClick(driver, btnNext);
             return true;

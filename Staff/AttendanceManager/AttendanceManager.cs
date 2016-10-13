@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using AimyTest.Utilities;
+using NUnit.Framework;
+using OpenQA.Selenium.Support.UI;
 
 namespace AimyTest.Attendance_Manager
 {
@@ -43,21 +45,44 @@ namespace AimyTest.Attendance_Manager
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[7]/div[2]/table/tbody/tr[1]/td[6]/img")]
         private IWebElement imgAttendedYes { get; set; }
 
-        public bool IsImgAttendedYesGreen(IWebDriver driver)
+        // RefreshButton
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[7]/div[4]/a[5]/span")]
+        private IWebElement btnRefresh { get; set; }
+
+        //Loading Animation Icon
+        [FindsBy(How = How.XPath, Using = "html/body/div[1]")]
+        private IWebElement loadingIcon { get; set; }
+        
+
+        private bool IsLoadingIconOff(IWebDriver driver)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            wait.PollingInterval = TimeSpan.FromSeconds(2);
+            wait.Until(ExpectedConditionsExtension.LoadingIconDisappears());
+            return true;
+        }
+
+        private bool IsImgAttendedYesGreen(IWebDriver driver)
         {
             bool flag = imgAttendedYes.Displayed;
             return flag;
         }
 
-        public bool InputSearchBox(IWebDriver driver, string childName)
+        private bool InputSearchBox(IWebDriver driver, string childName)
         {
             AimySendKeys(driver, inputSearchBox, childName);
             return true;
         }
 
-        public bool ClickOnEditButton(IWebDriver driver)
+        private bool ClickOnEditButton(IWebDriver driver)
         {
-            AimyClick(driver, btnEdit);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            AimyClick(driver, btnRefresh);
+            if (IsLoadingIconOff(driver))
+            {
+                Common.WaitBySleeping(GlobalVariable.iShortWait*40);
+                AimyClick(driver, btnEdit);
+            }
             return true;
         }
 
@@ -83,6 +108,55 @@ namespace AimyTest.Attendance_Manager
             }
             log.Info("[PASS] " + TestName);
             log.Info("The child '" + ChildName + "' exist " + TestName + ". PASSED!");
+            return true;
+        }
+
+        public bool ValidationAttendacneBeenSignedOut(IWebDriver driver, string ChildName, string AuthedParentName)
+        {
+            // First to check the Status of Edit Page
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            InputSearchBox(driver, ChildName);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            ClickOnEditButton(driver);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver), "IsChildBeenPickedUp");
+            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver), "IsChildSignedIn");
+            Assert.AreEqual(true, Pages.EditPage.IsSignOutByAuthedParent(driver, AuthedParentName));
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Pages.EditPage.CloseDialog(driver);
+            return true;
+        }
+
+        public bool ValidationAttendanceBeenSignedIn(IWebDriver driver, string ChildName)
+        {
+            // First to check the 'Green' tick flag on Attendance Management Page
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            InputSearchBox(driver, ChildName);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            IsImgAttendedYesGreen(driver);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 40);
+            // Second to go to 'Edit' page to check the status
+            ClickOnEditButton(driver);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver), "IsChildBeenPickedUp");
+            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver), "IsChildSignedIn");
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Pages.EditPage.CloseDialog(driver);
+            //
+            return true;
+        }
+
+        public bool ValidationAttendanceBeenPickedup(IWebDriver driver, string ChildName)
+        {
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            InputSearchBox(driver, ChildName);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            ClickOnEditButton(driver);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver), "IsChildBeenPickedUp");
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Pages.EditPage.CloseDialog(driver);
+
             return true;
         }
 
@@ -115,6 +189,23 @@ namespace AimyTest.Attendance_Manager
             bool exist = ValidationAttendance(driver, "AttendanceManager - Attendance Checking",
                 ChildName);
             return exist;
+        }
+    }
+
+    public class ExpectedConditionsExtension
+    {
+        public static Func<IWebDriver, bool> LoadingIconDisappears()
+        {
+            return delegate (IWebDriver driver)
+            {
+                IWebElement element = null;
+                try
+                {
+                    element = driver.FindElement(By.XPath("html/body/div[1]"));
+                }
+                catch (NoSuchElementException) { return true; }
+                return !element.Displayed;
+            };
         }
     }
 }

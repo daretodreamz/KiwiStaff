@@ -15,7 +15,7 @@ namespace AimyTest.Utilities
 
         public static int iLongWait = 50000; // >= 10,000 miliseconds
         public static int iMediumWait = 1000; // 1000 ~ 5000 miliseconds
-        public static int iShortWait = 50; // 50 miliseconds
+        public static int iShortWait = 100; // 50 miliseconds
 
 //        381	AutomationTest
 //393	Class Based Testing

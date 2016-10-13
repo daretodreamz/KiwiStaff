@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AimyTest.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -21,6 +22,18 @@ namespace AimyTest.Attendance_Manager
         // Cancel Button   html/body/div[17]/div[2]/div/div[2]/a[2]             
         [FindsBy(How = How.XPath, Using = "/html/body/div[13]/div[2]/div/div[2]/a[2]")]
         private IWebElement btnCancel { get; set; }
+
+        //the value of Signout By
+        [FindsBy(How = How.XPath, Using = "html/body/div[13]/div[2]/div/div[1]/table/tbody/tr[7]/td/div/table/tbody/tr/td[2]/div/div/table/tbody/tr[1]/td[2]/span/span/span[1]")]
+        private IWebElement ddlItemSignOutBy { get; set; }
+
+        public bool IsSignOutByAuthedParent(IWebDriver driver, string parentName)
+        {
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            if (ddlItemSignOutBy.Text.Equals(parentName))
+                return true;
+            return false;
+        }
 
         public bool IsChildBeenPickedUp(IWebDriver driver)
         {

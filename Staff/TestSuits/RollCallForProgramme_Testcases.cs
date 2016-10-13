@@ -21,64 +21,21 @@ namespace AimyTest.TestSuits
         {
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
-            //
             ChromeBrowser.Goto("Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
-            //
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.MobilePage.ClickOnDriverPickup(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.SchoolListPage.ClickOnNext(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.ChildListPage.ClickOnGreenTick(driver);
-            //
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.2 Extra Inv A"));
-            Pages.AttendanceManagerPage.InputSearchBox(driver, "EA.2 Extra Inv A");
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.AttendanceManagerPage.ClickOnEditButton(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver));
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.EditPage.CloseDialog(driver);
-            //
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Assert.AreEqual(true, Pages.MobilePage.ClickOnDriverPickup(driver));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.3 Extra Inv A"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceBeenPickedup(driver, "EA.3 Extra Inv A"));
             ChromeBrowser.Goto("Mobile");
-            //
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.MobilePage.ClickOnSignIn(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.ChildSignInPage.ClickOnChildSignIn(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.SignInRollCallPage.ClickOnGreenTick(driver);
-            //
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.2 Extra Inv A"));
-            Pages.AttendanceManagerPage.InputSearchBox(driver, "EA.2 Extra Inv A");
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.AttendanceManagerPage.IsImgAttendedYesGreen(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 40);
-            //
-            Pages.AttendanceManagerPage.ClickOnEditButton(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            ////////////Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver), "IsChildBeenPickedUp");
-            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver));
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.EditPage.CloseDialog(driver);
-            //
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
+            Assert.AreEqual(true, Pages.MobilePage.ClickOnSignIn(driver));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.3 Extra Inv A"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceBeenSignedIn(driver, "EA.3 Extra Inv A"));
             ChromeBrowser.Goto("Mobile");
-            //
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 40);
-            Pages.MobilePage.ClickOnSignOut(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.ChildSignOutPage.ClickOnChildSignOut(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.SignYourChildOutPage.ClickOnGreenTick(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.AuthorisedPickupsDialogPage.ClickOnAuthPickup(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.CanvasPage.DrawSignature(driver);
+            Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
+            Assert.AreEqual(true, Pages.MobilePage.ClickOnSignOut(driver));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.3 Extra Inv A"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendacneBeenSignedOut(driver, "EA.3 Extra Inv A", "Mary Extra Inv A"));
         }
     }
 }
