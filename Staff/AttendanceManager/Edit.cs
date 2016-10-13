@@ -16,6 +16,9 @@ namespace AimyTest.Attendance_Manager
         // statusYes                    
         [FindsBy(How = How.Id, Using = "statusYes")]
         private IWebElement chkStatusYes { get; set; }
+        // statusNo                   
+        [FindsBy(How = How.Id, Using = "statusNo")]
+        private IWebElement chkStatusNo { get; set; }
         //attendStatusYes
         [FindsBy(How = How.Id, Using = "attendStatusYes")]
         private IWebElement chkAttendedStatusYes { get; set; }
@@ -35,10 +38,13 @@ namespace AimyTest.Attendance_Manager
             return false;
         }
 
-        public bool IsChildBeenPickedUp(IWebDriver driver)
+        public bool IsChildBeenPickedUp(IWebDriver driver, bool flag)
         {
-            bool flag = chkStatusYes.Selected;
-            return flag;
+            bool result;
+            if (flag)
+                result = chkStatusYes.Selected;
+            else result = chkStatusNo.Selected;
+            return result;
         }
 
         public bool IsChildSignedIn(IWebDriver driver)

@@ -119,7 +119,7 @@ namespace AimyTest.Attendance_Manager
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             ClickOnEditButton(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver), "IsChildBeenPickedUp");
+            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver, true), "IsChildBeenPickedUp");
             Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver), "IsChildSignedIn");
             Assert.AreEqual(true, Pages.EditPage.IsSignOutByAuthedParent(driver, AuthedParentName));
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
@@ -138,7 +138,7 @@ namespace AimyTest.Attendance_Manager
             // Second to go to 'Edit' page to check the status
             ClickOnEditButton(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver), "IsChildBeenPickedUp");
+            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver, true), "IsChildBeenPickedUp");
             Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver), "IsChildSignedIn");
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.EditPage.CloseDialog(driver);
@@ -146,18 +146,18 @@ namespace AimyTest.Attendance_Manager
             return true;
         }
 
-        public bool ValidationAttendanceBeenPickedup(IWebDriver driver, string ChildName)
+        public bool IsAttendancePickedup(IWebDriver driver, string ChildName, bool flag = true)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             InputSearchBox(driver, ChildName);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             ClickOnEditButton(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver), "IsChildBeenPickedUp");
+            bool result = Pages.EditPage.IsChildBeenPickedUp(driver, flag);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.EditPage.CloseDialog(driver);
 
-            return true;
+            return result;
         }
 
         public bool ValidationAttendanceExist(IWebDriver driver, string whichTerm, string ChildName)

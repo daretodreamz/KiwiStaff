@@ -24,14 +24,29 @@ namespace AimyTest.Tablet
         [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[1]/div[5]/div[3]/a")]
         private IWebElement btnSignOut { get; set; }
 
-        public bool ClickOnDriverPickup(IWebDriver driver)
+        public enum GreenRedOptions
+        {
+            Green,
+            Red
+        }
+
+       public bool ClickOnDriverPickup(IWebDriver driver, GreenRedOptions greenRedFlag)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             AimyClick(driver, btnDriverPickup);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.SchoolListPage.ClickOnNext(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.ChildListPage.ClickOnGreenTick(driver);
+            if (greenRedFlag == GreenRedOptions.Green)
+            {
+                Pages.ChildListPage.ClickOnGreenTick(driver);
+            }
+            else if(greenRedFlag == GreenRedOptions.Red)
+            {
+                Pages.ChildListPage.ClickOnRedTick(driver);
+                Pages.ChildListPage.ChooseOtherReason(driver);
+            }
+            
             return true;
         }
 
