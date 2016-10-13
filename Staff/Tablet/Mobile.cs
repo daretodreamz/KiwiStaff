@@ -74,11 +74,9 @@ namespace AimyTest.Tablet
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             AimyClick(driver, btnSignOut);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            Pages.ChildSignOutPage.ClickOnChildSignOut(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-
-            if (Pages.SignYourChildOutPage.CheckNoRecord(driver))
-                return true;
+            if (!Pages.ChildSignOutPage.ClickOnChildSignOut(driver))
+                return false;
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);            
             Pages.SignYourChildOutPage.ClickOnGreenTick(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.AuthorisedPickupsDialogPage.ClickOnAuthPickup(driver);

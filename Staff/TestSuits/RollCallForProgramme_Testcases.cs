@@ -78,7 +78,7 @@ namespace AimyTest.TestSuits
             Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedIn(driver, "EA.4 Extra Inv A", false));
             ChromeBrowser.Goto("Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
-            Assert.AreEqual(true, Pages.MobilePage.ClickOnSignOut(driver));
+            Assert.AreEqual(false, Pages.MobilePage.ClickOnSignOut(driver));
         }
     }
 }

@@ -26,6 +26,8 @@ namespace AimyTest.Tablet.SignOut
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             AimyClick(driver, btnRefresh);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
+            if (Pages.SignYourChildOutPage.CheckNoRecord(driver))
+                return false;
             AimyClick(driver, btnNext);
             return true;
         }
