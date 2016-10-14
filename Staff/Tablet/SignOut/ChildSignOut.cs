@@ -21,11 +21,24 @@ namespace AimyTest.Tablet.SignOut
         [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div/a/img")]
         private IWebElement btnRefresh { get; set; }
 
+        // a class="signOut ui-btn"
+        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[2]/div[2]/ul/li/a")]
+        private IWebElement btn { get; set; }
+
         public bool ClickOnChildSignOut(IWebDriver driver)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             AimyClick(driver, btnRefresh);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
+            try
+            {
+                bool element = !btn.Enabled;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+           
             if (Pages.SignYourChildOutPage.CheckNoRecord(driver))
                 return false;
             AimyClick(driver, btnNext);

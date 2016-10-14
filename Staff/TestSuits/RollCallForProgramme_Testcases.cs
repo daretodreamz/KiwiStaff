@@ -69,13 +69,13 @@ namespace AimyTest.TestSuits
             ChromeBrowser.Goto("Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnDriverPickup(driver, Mobile.GreenRedOptions.Red));
-            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.4 Extra Inv A"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "Weekly Do"));
             //Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendancePickedup(driver, "EA.4 Extra Inv A", false));
             ChromeBrowser.Goto("Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignIn(driver, Mobile.GreenRedOptions.Red));
-            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.4 Extra Inv A"));
-            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedIn(driver, "EA.4 Extra Inv A", false));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "Weekly Do"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedIn(driver, "Weekly Do", false));
             ChromeBrowser.Goto("Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(false, Pages.MobilePage.ClickOnSignOut(driver));
