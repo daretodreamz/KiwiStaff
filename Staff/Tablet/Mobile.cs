@@ -30,7 +30,14 @@ namespace AimyTest.Tablet
             Red
         }
 
-       public bool ClickOnDriverPickup(IWebDriver driver, GreenRedOptions greenRedFlag)
+        public enum ProgrammesOptions
+        {
+            BSC,
+            ASC
+        }
+
+
+        public bool ClickOnDriverPickup(IWebDriver driver, GreenRedOptions greenRedFlag, string whichChild)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             AimyClick(driver, btnDriverPickup);
@@ -39,45 +46,50 @@ namespace AimyTest.Tablet
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             if (greenRedFlag == GreenRedOptions.Green)
             {
-                Pages.ChildListPage.ClickOnGreenTick(driver);
+                Pages.ChildListPage.ClickOnGreenTick(driver, whichChild);
             }
             else if(greenRedFlag == GreenRedOptions.Red)
             {
-                Pages.ChildListPage.ClickOnRedTick(driver);
+                Pages.ChildListPage.ClickOnRedTick(driver, whichChild);
                 Pages.ChildListPage.ChooseOtherReason(driver);
             }
             
             return true;
         }
 
-        public bool ClickOnSignIn(IWebDriver driver, GreenRedOptions greenRedFlag)
+        public bool ClickOnSignIn(IWebDriver driver, GreenRedOptions greenRedFlag, string whichChild, ProgrammesOptions whichProg = ProgrammesOptions.ASC)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             AimyClick(driver, btnSignIn);
             Common.WaitBySleeping(GlobalVariable.iShortWait*20);
-            Pages.ChildSignInPage.ClickOnChildSignIn(driver);
-            Common.WaitBySleeping(GlobalVariable.iShortWait*20);
-            if (greenRedFlag == GreenRedOptions.Green)
+            if(whichProg == ProgrammesOptions.ASC)
             {
-                Pages.SignInRollCallPage.ClickOnGreenTick(driver);
+                Pages.ChildSignInPage.ClickOnChildSignIn(driver, whichChild, whichProg);
+                Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+                if (greenRedFlag == GreenRedOptions.Green)
+                {
+                    Pages.SignInRollCallPage.ClickOnGreenTick(driver, whichChild);
+                }
+                else if (greenRedFlag == GreenRedOptions.Red)
+                {
+                    Pages.SignInRollCallPage.ClickOnRedTick(driver, whichChild);
+                    Pages.SignInRollCallPage.ChooseOtherReason(driver);
+                }
             }
-            else if (greenRedFlag == GreenRedOptions.Red)
-            {
-                Pages.SignInRollCallPage.ClickOnRedTick(driver);
-                Pages.SignInRollCallPage.ChooseOtherReason(driver);
-            }
+            else { }           
             return true;
         }
 
-        public bool ClickOnSignOut(IWebDriver driver)
+        public bool ClickOnSignOut(IWebDriver driver, string whichChild)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             AimyClick(driver, btnSignOut);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             if (!Pages.ChildSignOutPage.ClickOnChildSignOut(driver))
                 return false;
-            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);            
-            Pages.SignYourChildOutPage.ClickOnGreenTick(driver);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            if (!Pages.SignYourChildOutPage.ClickOnGreenTick(driver, whichChild))
+                return false;
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             Pages.AuthorisedPickupsDialogPage.ClickOnAuthPickup(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);

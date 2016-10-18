@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AimyTest.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using static AimyTest.Tablet.Mobile;
 
 namespace AimyTest.Tablet.SignIn
 {
@@ -13,14 +14,20 @@ namespace AimyTest.Tablet.SignIn
     {
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
-        // Next button
-        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[2]/div[3]/ul/li/a")]
-        private IWebElement btnNext { get; set; }
+        // ASC button
+        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[2]/div[3]/ul/li[1]/a/div/div[1]/h1")]
+        private IWebElement btnASC { get; set; }
 
-        public bool ClickOnChildSignIn(IWebDriver driver)
+        // BSC button
+        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[2]/div[3]/ul/li[2]/a/div/div[1]/h1")]
+        private IWebElement btnBSC { get; set; }
+
+        public bool ClickOnChildSignIn(IWebDriver driver, string whichChild, ProgrammesOptions whichProg)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            AimyClick(driver, btnNext);
+            if (whichProg == ProgrammesOptions.ASC)
+                AimyClick(driver, btnASC);
+            else AimyClick(driver, btnBSC);
             return true;
         }
     }
