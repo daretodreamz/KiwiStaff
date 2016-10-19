@@ -11,7 +11,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
-namespace AimyTest.Deleting_a_parent
+namespace AimyTest.Parent_Management
 {
     public class ParentManagement : MyElelment
     {

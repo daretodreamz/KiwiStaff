@@ -76,5 +76,24 @@ namespace AimyTest.Booking_Reconciliation
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             return true;
         }
+
+        public bool GenerateInvoice(IWebDriver driver, string whichChild, string whichDate)
+        {
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            DoScrollTo(driver, By.XPath("html/body/div[3]/div[2]/div/div[1]/div/span/span/span[2]/span"));
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            AimyClick(driver, ddlFilter);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            Common.SelectKendoDDLByTextValue(driver, "Invoice", "html/body/div[12]/div/ul/li");
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            int i = PositionChild(driver, whichChild, whichDate);
+            if (i == -1) throw new Exception("There is NOT any items available, Please check!");
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            AimyClick(driver, driver.FindElement(By.XPath("html/body/div[3]/div[2]/div/div[3]/table/tbody/tr[" + i + "]/td[12]/span/button[1]")));
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            AimyClick(driver, btnOK);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            return true;
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace AimyTest.Tablet.SignOut
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             AimyClick(driver, btnRefresh);
-            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
            
             try
             {

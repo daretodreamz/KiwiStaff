@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 
-namespace AimyTest.Deleting_a_child
+namespace AimyTest.Children_Management
 {
     public class ChildrenManagement : MyElelment
     {

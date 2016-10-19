@@ -25,13 +25,40 @@ namespace AimyTest.Attendance_Manager
         //attendStatusNo
         [FindsBy(How = How.Id, Using = "attendStatusNo")]
         private IWebElement chkAttendedStatusNo { get; set; }
-        // Cancel Button   html/body/div[17]/div[2]/div/div[2]/a[2]             
+        // Cancel Button              
         [FindsBy(How = How.XPath, Using = "/html/body/div[13]/div[2]/div/div[2]/a[2]")]
         private IWebElement btnCancel { get; set; }
+        // Save Button                
+        [FindsBy(How = How.XPath, Using = "/html/body/div[13]/div[2]/div/div[2]/a[1]")]
+        private IWebElement btnSave { get; set; }
+        //Dialog Ok Button
+        [FindsBy(How = How.Id, Using = "kiwi-confirm-yes")]
+        private IWebElement btnOK { get; set; }
 
         //the value of Signout By
         [FindsBy(How = How.XPath, Using = "html/body/div[13]/div[2]/div/div[1]/table/tbody/tr[7]/td/div/table/tbody/tr/td[2]/div/div/table/tbody/tr[1]/td[2]/span/span/span[1]")]
         private IWebElement ddlItemSignOutBy { get; set; }
+
+        // actual Sign In DDL
+        [FindsBy(How = How.XPath, Using = "html/body/div[13]/div[2]/div/div[1]/table/tbody/tr[7]/td/div/table/tbody/tr/td[1]/div/div/table/tbody/tr[3]/td[2]/div/span/span/input")]
+        private IWebElement ddlActualSignIn { get; set; }
+        // actual Sign Out DDL
+        [FindsBy(How = How.XPath, Using = "html/body/div[13]/div[2]/div/div[1]/table/tbody/tr[7]/td/div/table/tbody/tr/td[2]/div/div/table/tbody/tr[3]/td[2]/div/span/span/input")]
+        private IWebElement ddlActualSignOut { get; set; }
+
+        public bool ReconciliateForExtraCharge(IWebDriver driver)
+        {
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            AimyClick(driver, ddlActualSignIn);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
+            Common.SelectKendoDDLByTextValue(driver, "3:00 p.m.", "html/body/div[14]/div/ul/li");
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
+            AimyClick(driver, ddlActualSignOut);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
+            Common.SelectKendoDDLByTextValue(driver, "6:30 p.m.", "html/body/div[15]/div/ul/li");
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
+            return true;
+        }
 
         public bool IsSignOutByAuthedParent(IWebDriver driver, string parentName)
         {
@@ -62,6 +89,15 @@ namespace AimyTest.Attendance_Manager
         public void CloseDialog(IWebDriver driver)
         {
             AimyClick(driver, btnCancel);
+        }
+
+        public void SaveDialog(IWebDriver driver)
+        {
+            AimyClick(driver, btnSave);
+            //
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
+            AimyClick(driver, btnOK);
+            Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
         }
 
     }

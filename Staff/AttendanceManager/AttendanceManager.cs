@@ -183,18 +183,28 @@ namespace AimyTest.Attendance_Manager
             return false;
         }
 
-        public bool ValidationAttendacneBeenSignedOut(IWebDriver driver, string ChildName, string AuthedParentName, ProgrammesOptions whichProgramme = ProgrammesOptions.ASC, bool flag = true)
+        public bool IsAttendacneSignedOut(IWebDriver driver, string ChildName, string AuthedParentName, ProgrammesOptions whichProgramme = ProgrammesOptions.ASC, bool attendedStatus = true, bool reconciliationForExtraCharge = false)
         {
             // First to check the Status of Edit Page
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             InputSearchBox(driver, ChildName);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            ClickOnEditButton(driver, ChildName, whichProgramme);
+            ClickOnEditButton(driver, ChildName, whichProgramme);            
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             //Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver, true), "IsChildBeenPickedUp");
-            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver, flag), "IsChildSignedIn");
+            Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver, attendedStatus), "IsChildSignedIn");
             Assert.AreEqual(true, Pages.EditPage.IsSignOutByAuthedParent(driver, AuthedParentName));
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
+            if (reconciliationForExtraCharge)
+            {
+                //do extra update
+                if (Pages.EditPage.ReconciliateForExtraCharge(driver))
+                {
+                    Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
+                    Pages.EditPage.SaveDialog(driver);
+                }                    
+                return true;
+            }
             Pages.EditPage.CloseDialog(driver);
             return true;
         }
@@ -262,6 +272,12 @@ namespace AimyTest.Attendance_Manager
                 ChildName, whichProg);
             return exist;
         }
+
+
+
+
+
+
     }
 
     public class ExpectedConditionsExtension
