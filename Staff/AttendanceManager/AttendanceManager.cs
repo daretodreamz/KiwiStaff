@@ -183,7 +183,7 @@ namespace AimyTest.Attendance_Manager
             return false;
         }
 
-        public bool IsAttendacneSignedOut(IWebDriver driver, string ChildName, string AuthedParentName, ProgrammesOptions whichProgramme = ProgrammesOptions.ASC, bool attendedStatus = true, bool reconciliationForExtraCharge = false)
+        public bool IsAttendanceSignedOut(IWebDriver driver, string ChildName, string AuthedParentName, ProgrammesOptions whichProgramme = ProgrammesOptions.ASC, bool attendedStatus = true, bool reconciliationForExtraCharge = false)
         {
             // First to check the Status of Edit Page
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);

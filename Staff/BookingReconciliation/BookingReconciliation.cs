@@ -58,7 +58,7 @@ namespace AimyTest.Booking_Reconciliation
             return -1;
         }
 
-        public bool CreateCrediNote(IWebDriver driver, string whichChild, string whichDate)
+        public bool CreateCreditNote(IWebDriver driver, string whichChild, string whichDate)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             DoScrollTo(driver, By.XPath("html/body/div[3]/div[2]/div/div[1]/div/span/span/span[2]/span"));

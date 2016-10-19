@@ -36,7 +36,7 @@ namespace AimyTest.TestSuits
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignOut(driver, "EA.4 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.4 Extra Inv A"));
-            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendacneSignedOut(driver, "EA.4 Extra Inv A", "Mary Extra Inv A"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedOut(driver, "EA.4 Extra Inv A", "Mary Extra Inv A"));
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace AimyTest.TestSuits
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignOut(driver, "EA.3 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.3 Extra Inv A"));
-            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendacneSignedOut(driver, "EA.3 Extra Inv A", "Mary Extra Inv A"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedOut(driver, "EA.3 Extra Inv A", "Mary Extra Inv A"));
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace AimyTest.TestSuits
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.5 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedIn(driver, "EA.5 Extra Inv A", Mobile.ProgrammesOptions.ASC, false));
             ChromeBrowser.Goto("RollSheet/CostReconciliationV2");
-            Assert.AreEqual(true, Pages.BookingReconciliationPage.CreateCrediNote(driver, "EA.5 Extra Inv A", "19/10/2016"));
+            Assert.AreEqual(true, Pages.BookingReconciliationPage.CreateCreditNote(driver, "EA.5 Extra Inv A", "19/10/2016"));
             ChromeBrowser.Goto("Finance/RedirectType?type=XeroInvoicePage");
             Assert.AreEqual(true, Pages.TransactionHistoryPage.CheckCreditNote(driver, "Mary Extra Inv A", "19/10/2016"));
         }
@@ -112,7 +112,7 @@ namespace AimyTest.TestSuits
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignOut(driver, "William Wallace"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "William Wallace"));
-            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendacneSignedOut(driver, "William Wallace", "Kevin Duong", 
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedOut(driver, "William Wallace", "Kevin Duong", 
                 Mobile.ProgrammesOptions.ASC, true, true));
             ChromeBrowser.Goto("RollSheet/CostReconciliationV2");
             Assert.AreEqual(true, Pages.BookingReconciliationPage.GenerateInvoice(driver, "William Wallace", "19/10/2016"));
