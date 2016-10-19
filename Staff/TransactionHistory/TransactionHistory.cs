@@ -15,8 +15,6 @@ namespace AimyTest.Transaction_History
     {
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
-        static private string sURL;
-
         // 'Credit Note' tab
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div/div[2]/ul/li[4]/a")]
         private IWebElement tabCreditNote { get; set; }

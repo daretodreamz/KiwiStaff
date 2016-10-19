@@ -15,8 +15,6 @@ namespace AimyTest.Booking_Reconciliation
     {
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
-        static private string sURL;
-
         // Filter 'Invoice and Credit Note'
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[2]/div/div[1]/div/span")]
         private IWebElement ddlFilter { get; set; }

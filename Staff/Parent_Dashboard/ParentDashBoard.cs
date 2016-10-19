@@ -14,8 +14,6 @@ namespace AimyTest.Parent_Dashboard
     {
        private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
-        static private string sURL;
-
         // 'Select All Terms' checkbox
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div/div/div[1]/div[1]/div[2]/div[2]/a")]
         private IWebElement btnMakeBooking { get; set; }

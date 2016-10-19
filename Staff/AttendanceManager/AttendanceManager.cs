@@ -193,7 +193,7 @@ namespace AimyTest.Attendance_Manager
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             //Assert.AreEqual(true, Pages.EditPage.IsChildBeenPickedUp(driver, true), "IsChildBeenPickedUp");
             Assert.AreEqual(true, Pages.EditPage.IsChildSignedIn(driver, attendedStatus), "IsChildSignedIn");
-            Assert.AreEqual(true, Pages.EditPage.IsSignOutByAuthedParent(driver, AuthedParentName));
+            Assert.AreEqual(true, Pages.EditPage.IsSignOutByAuthedParent(driver, AuthedParentName), "IsSignOutByAuthedParent");
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             if (reconciliationForExtraCharge)
             {
@@ -272,12 +272,6 @@ namespace AimyTest.Attendance_Manager
                 ChildName, whichProg);
             return exist;
         }
-
-
-
-
-
-
     }
 
     public class ExpectedConditionsExtension

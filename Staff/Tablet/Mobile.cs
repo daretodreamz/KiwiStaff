@@ -36,7 +36,6 @@ namespace AimyTest.Tablet
             ASC
         }
 
-
         public bool ClickOnDriverPickup(IWebDriver driver, GreenRedOptions greenRedFlag, string whichChild)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
