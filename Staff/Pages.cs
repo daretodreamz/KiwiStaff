@@ -9,6 +9,7 @@ using AimyTest.Booking_Pages_BSC_ASC;
 using AimyTest.Booking_Pages_Classes;
 using AimyTest.Booking_Pages_HolidayProgramme;
 using AimyTest.Booking_Pages_SpecialDay;
+using AimyTest.Booking_Reconciliation;
 using AimyTest.Browsers;
 using AimyTest.Deleting_a_child;
 using AimyTest.Deleting_a_parent;
@@ -20,6 +21,7 @@ using AimyTest.Tablet.DriverPickup;
 using AimyTest.Tablet.SignIn;
 using AimyTest.Tablet.SignOut;
 using OpenQA.Selenium.Support.PageObjects;
+using AimyTest.Transaction_History;
 
 namespace AimyTest
 {
@@ -237,6 +239,16 @@ namespace AimyTest
         public static Canvas CanvasPage
         {
             get { return GetPage<Canvas>(); }
+        }
+
+        public static BookingReconciliation BookingReconciliationPage
+        {
+            get { return GetPage<BookingReconciliation>(); }
+        }
+
+        public static TransactionHistory TransactionHistoryPage
+        {
+            get { return GetPage<TransactionHistory>(); }
         }
     }
 }

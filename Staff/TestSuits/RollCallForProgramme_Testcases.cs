@@ -80,5 +80,21 @@ namespace AimyTest.TestSuits
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(false, Pages.MobilePage.ClickOnSignOut(driver, "EA.2 Extra Inv A"));
         }
+
+        [Test]
+        public void Roll_call_for_Program_TC04()
+        {
+            Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
+            Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
+            ChromeBrowser.Goto("Mobile");
+            Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
+            Assert.AreEqual(true, Pages.MobilePage.ClickOnSignIn(driver, Mobile.GreenRedOptions.Red, "EA.5 Extra Inv A"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.5 Extra Inv A"));
+            Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedIn(driver, "EA.5 Extra Inv A", Mobile.ProgrammesOptions.ASC, false));
+            ChromeBrowser.Goto("RollSheet/CostReconciliationV2");
+            Assert.AreEqual(true, Pages.BookingReconciliationPage.CreateCrediNote(driver, "EA.5 Extra Inv A", "19/10/2016"));
+            ChromeBrowser.Goto("Finance/RedirectType?type=XeroInvoicePage");
+            Assert.AreEqual(true, Pages.TransactionHistoryPage.CheckCreditNote(driver, "Mary Extra Inv A", "19/10/2016"));
+        }
     }
 }

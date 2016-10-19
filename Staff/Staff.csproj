@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="AttendanceManager\AttendanceManager.cs" />
     <Compile Include="AttendanceManager\Edit.cs" />
+    <Compile Include="Booking Reconciliation\BookingReconciliation.cs" />
     <Compile Include="Booking_Manager\BookingManager.cs" />
     <Compile Include="Booking_Pages_BSC_ASC\BookingPages_Wizard8.cs" />
     <Compile Include="Booking_Pages_BSC_ASC\BookingPages_Wizard7.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="TestSuits\RollCallForProgramme_Testcases.cs" />
     <Compile Include="TestSuits\SpecialDayBooking_Testcases.cs" />
     <Compile Include="TestSuits\TestBase.cs" />
+    <Compile Include="TransactionHistory\TransactionHistory.cs" />
     <Compile Include="Utilities\Common.cs" />
     <Compile Include="Utilities\ExcelLib.cs" />
     <Compile Include="Utilities\GlobalVariable.cs" />
