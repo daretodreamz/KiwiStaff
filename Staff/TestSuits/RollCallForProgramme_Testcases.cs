@@ -26,7 +26,7 @@ namespace AimyTest.TestSuits
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnDriverPickup(driver, Mobile.GreenRedOptions.Green, "EA.4 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.4 Extra Inv A"));
-            //Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendancePickedup(driver, "EA.3 Extra Inv A"));
+            //Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendancePickedup(driver, "EA.4 Extra Inv A"));
             ChromeBrowser.Goto("Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignIn(driver, Mobile.GreenRedOptions.Green, "EA.4 Extra Inv A", Mobile.ProgrammesOptions.ASC));
@@ -48,7 +48,7 @@ namespace AimyTest.TestSuits
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnDriverPickup(driver, Mobile.GreenRedOptions.Red, "EA.3 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.3 Extra Inv A"));
-            //Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendancePickedup(driver, "EA.4 Extra Inv A", false));
+            //Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendancePickedup(driver, "EA.3 Extra Inv A", false));
             ChromeBrowser.Goto("Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignIn(driver, Mobile.GreenRedOptions.Green, "EA.3 Extra Inv A"));
@@ -70,7 +70,7 @@ namespace AimyTest.TestSuits
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnDriverPickup(driver, Mobile.GreenRedOptions.Red, "EA.2 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.2 Extra Inv A"));
-            //Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendancePickedup(driver, "EA.4 Extra Inv A", false));
+            //Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendancePickedup(driver, "EA.2 Extra Inv A", false));
             ChromeBrowser.Goto("Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignIn(driver, Mobile.GreenRedOptions.Red, "EA.2 Extra Inv A"));
@@ -92,11 +92,10 @@ namespace AimyTest.TestSuits
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.5 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedIn(driver, "EA.5 Extra Inv A", Mobile.ProgrammesOptions.ASC, false));
             ChromeBrowser.Goto("RollSheet/CostReconciliationV2");
-            Assert.AreEqual(true, Pages.BookingReconciliationPage.CreateCreditNote(driver, "EA.5 Extra Inv A", "19/10/2016"));
+            Assert.AreEqual(true, Pages.BookingReconciliationPage.CreateCreditNote(driver, "EA.5 Extra Inv A", "20/10/2016"));
             ChromeBrowser.Goto("Finance/RedirectType?type=XeroInvoicePage");
-            Assert.AreEqual(true, Pages.TransactionHistoryPage.CheckCreditNote(driver, "Mary Extra Inv A", "19/10/2016"));
+            Assert.AreEqual(true, Pages.TransactionHistoryPage.CheckCreditNote(driver, "Mary Extra Inv A", "20/10/2016"));
         }
-
 
         [Test]
         public void Roll_call_for_Program_TC05()
@@ -115,9 +114,9 @@ namespace AimyTest.TestSuits
             Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedOut(driver, "William Wallace", "Kevin Duong", 
                 Mobile.ProgrammesOptions.ASC, true, true));
             ChromeBrowser.Goto("RollSheet/CostReconciliationV2");
-            Assert.AreEqual(true, Pages.BookingReconciliationPage.GenerateInvoice(driver, "William Wallace", "19/10/2016"));
+            Assert.AreEqual(true, Pages.BookingReconciliationPage.GenerateInvoice(driver, "William Wallace", "20/10/2016"));
             ChromeBrowser.Goto("Finance/RedirectType?type=XeroInvoicePage");
-            Assert.AreEqual(true, Pages.TransactionHistoryPage.CheckExtraInvoice(driver, "Kevin Duong", "19/10/2016"));
+            Assert.AreEqual(true, Pages.TransactionHistoryPage.CheckExtraInvoice(driver, "Kevin Duong", "20/10/2016"));
         }
     }
 }

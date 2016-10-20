@@ -85,8 +85,8 @@ namespace AimyTest.Children_Management
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             AimySendKeys(driver, WebDriverExtensions.FindElement(driver, By.Id("category"), 2), ChildName);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            bool actuResult = ValidationChildAchive(driver, "AchiveChildren");
-            return actuResult;
+            bool actulResult = ValidationChildAchive(driver, "AchiveChildren");
+            return actulResult;
         }
     }
 }

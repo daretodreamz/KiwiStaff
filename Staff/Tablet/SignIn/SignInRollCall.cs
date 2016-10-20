@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AimyTest.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Remote;
 
 namespace AimyTest.Tablet.SignIn
 {
@@ -47,11 +48,19 @@ namespace AimyTest.Tablet.SignIn
             return -1;
         }
 
+        private void DoScrollTo(IWebDriver driver, By by)
+        {
+            //System.Drawing.Point point = ((RemoteWebElement)driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
+
+            IJavaScriptExecutor Executor = ((IJavaScriptExecutor)driver);
+            Executor.ExecuteScript("arguments[0].scrollIntoView(true);", driver.FindElement(by));
+        }
         public bool ClickOnGreenTick(IWebDriver driver, string whichChild)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             int i = PositionChild(driver, whichChild);
             if (i == -1) throw new Exception("There is NOT any items available, Please check!");
+            DoScrollTo(driver, By.XPath("html/body/div[4]/div[3]/div[2]/ul/li[" + i + "]/div[1]/div[2]/div/a[1]/img"));            
             AimyClick(driver, driver.FindElement(By.XPath("html/body/div[4]/div[3]/div[2]/ul/li[" + i + "]/div[1]/div[2]/div/a[1]/img")));
             return true;
         }

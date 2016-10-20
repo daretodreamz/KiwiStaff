@@ -94,9 +94,10 @@ namespace AimyTest.Attendance_Manager
                                         return flag = driver.FindElement(By.XPath("html/body/div[3]/div[7]/div[2]/table/tbody/tr[" + counter + "]/td[6]/img")).GetAttribute("src").Contains("No");
                                     }
                                 }
-                            }                             }
+                            }
                         }
-                    }                
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -137,12 +138,13 @@ namespace AimyTest.Attendance_Manager
                             if (e != null && e.Displayed && e.Text.Contains("ASC"))
                             {
                                 AimyClick(driver, driver.FindElement(By.XPath("html/body/div[3]/div[7]/div[2]/table/tbody/tr[" + counter + "]/td[10]/a[1]")));
+                                return true;
                             }
                         }
                     }
                 }
             }
-            return true;
+            return false;
         }
 
         private bool ValidationAttendance(IWebDriver driver, string TestName, string ChildName, ProgrammesOptions whichProg)

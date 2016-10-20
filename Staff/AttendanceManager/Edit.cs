@@ -99,6 +99,5 @@ namespace AimyTest.Attendance_Manager
             AimyClick(driver, btnOK);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 10);
         }
-
     }
 }
