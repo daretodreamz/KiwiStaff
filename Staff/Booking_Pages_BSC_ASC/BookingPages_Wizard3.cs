@@ -24,13 +24,7 @@ namespace AimyTest.Booking_Pages_BSC_ASC
         private IWebElement btnTerms { get; set; }
 
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div/div[1]/div/div[7]/button[2]")]
-        private IWebElement btnNext { get; set; }
-
-
-        private void DoScrollTo(IWebDriver driver, By by)
-        {
-            System.Drawing.Point point = ((RemoteWebElement)driver.FindElement(by)).LocationOnScreenOnceScrolledIntoView;
-        }
+        private IWebElement btnNext { get; set; }      
 
         public void StepsForBookingWizard3(IWebDriver driver)
         {

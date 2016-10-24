@@ -15,11 +15,11 @@ namespace AimyTest.Tablet.SignIn
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         // Click on Green Tick
-        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div[2]/ul/li[1]/div[1]/div[2]/div/a[1]/img")]
-        private IWebElement btnGreenTick { get; set; }
+        //[FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div[2]/ul/li[1]/div[1]/div[2]/div/a[1]/img")]
+        //private IWebElement btnGreenTick { get; set; }
         // Click on Red Tick
-        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div[2]/ul/li[1]/div[1]/div[2]/div/a[2]/img")]
-        private IWebElement btnRedTick { get; set; }
+        //[FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div[2]/ul/li[1]/div[1]/div[2]/div/a[2]/img")]
+        //private IWebElement btnRedTick { get; set; }
 
         // Reason Not Pick up              
         [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[17]/div/div/ul/li[6]/a")]
@@ -32,7 +32,7 @@ namespace AimyTest.Tablet.SignIn
         private IWebElement saveOtherReason { get; set; }
 
 
-        private int PositionChild(IWebDriver driver, string childName)
+        private int LocateChild(IWebDriver driver, string childName)
         {
             var elements = driver.FindElements(By.XPath("html/body/div[4]/div[3]/div[2]/ul/li"));
             if (elements.Count > 0)
@@ -58,7 +58,7 @@ namespace AimyTest.Tablet.SignIn
         public bool ClickOnGreenTick(IWebDriver driver, string whichChild)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            int i = PositionChild(driver, whichChild);
+            int i = LocateChild(driver, whichChild);
             if (i == -1) throw new Exception("There is NOT any items available, Please check!");
             DoScrollTo(driver, By.XPath("html/body/div[4]/div[3]/div[2]/ul/li[" + i + "]/div[1]/div[2]/div/a[1]/img"));            
             AimyClick(driver, driver.FindElement(By.XPath("html/body/div[4]/div[3]/div[2]/ul/li[" + i + "]/div[1]/div[2]/div/a[1]/img")));
@@ -67,7 +67,7 @@ namespace AimyTest.Tablet.SignIn
         public bool ClickOnRedTick(IWebDriver driver, string whichChild)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            int i = PositionChild(driver, whichChild);
+            int i = LocateChild(driver, whichChild);
             if (i == -1) throw new Exception("There is NOT any items available, Please check!");
             AimyClick(driver, driver.FindElement(By.XPath("html/body/div[4]/div[3]/div[2]/ul/li[" + i + "]/div[1]/div[2]/div/a[2]/img")));
             return true;

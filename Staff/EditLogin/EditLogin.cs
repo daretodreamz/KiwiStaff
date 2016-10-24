@@ -34,7 +34,6 @@ namespace AimyTest.Edit_Login
             AimyClick(driver, btnSubmit);
             log.Info("[PASS]");
             return true;
-        }
-       
+        }       
     }
 }

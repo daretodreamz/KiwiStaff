@@ -153,8 +153,6 @@ namespace AimyTest.Parent_Management
                 "Parent Management - Archived List - aimy plus");
 
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-
-
         }
 
         public bool FindTheParent(IWebDriver driver, string ParentName)

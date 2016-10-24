@@ -15,8 +15,8 @@ namespace AimyTest.Tablet.SignOut
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
         // Click on Green Tick              
-        [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div/ul/li/div[1]/div[2]/div/a/img")]
-        private IWebElement btnGreenTick { get; set; }
+        //[FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div/ul/li/div[1]/div[2]/div/a/img")]
+        //private IWebElement btnGreenTick { get; set; }
 
         // No Records            
         [FindsBy(How = How.XPath, Using = "html/body/div[4]/div[3]/div[1]/h3")]

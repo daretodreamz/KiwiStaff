@@ -29,10 +29,6 @@ namespace AimyTest.Booking_Pages_Classes
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div[2]/div[1]/div/div[5]/button[2]")]
         private IWebElement btnNext { get; set; }
 
-
-
-
-
         public void StepsForBookingWizard3(IWebDriver driver)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait);
