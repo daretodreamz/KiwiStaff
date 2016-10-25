@@ -14,7 +14,7 @@ namespace AimyTest.TestSuits
         public RollCallForProgramme_Testcases()
         {
             driver = ChromeBrowser.chromeDriver;
-            ChromeBrowser.Initialize();
+            ChromeBrowser.Initialize();            
         }
 
         [Test]

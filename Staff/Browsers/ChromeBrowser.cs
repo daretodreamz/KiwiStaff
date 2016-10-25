@@ -16,7 +16,7 @@ namespace AimyTest.Browsers
         public static IWebDriver chromeDriver
         {
             get { return webDriver; }
-    }
+        }
 
         public static void Initialize()
         {

@@ -22,6 +22,11 @@ namespace AimyTest.Browsers
             Goto("");
         }
 
+        public static IWebDriver firefoxDriver
+        {
+            get { return webDriver; }
+        }
+
         public static string Title
         {
             get { return webDriver.Title; }
