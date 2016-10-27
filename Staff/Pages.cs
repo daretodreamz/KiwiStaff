@@ -22,16 +22,30 @@ using AimyTest.Tablet.SignIn;
 using AimyTest.Tablet.SignOut;
 using OpenQA.Selenium.Support.PageObjects;
 using AimyTest.Transaction_History;
+using OpenQA.Selenium;
 
 namespace AimyTest
 {
     public static class Pages
     {
+        private static IWebDriver drv = null;
         private static T GetPage<T>() where T : new()
         {
             var page = new T();
-            PageFactory.InitElements(ChromeBrowser.Driver, page);
+            
+            if (drv.GetType().FullName.Contains("OpenQA.Selenium.Chrome.ChromeDriver"))          
+                PageFactory.InitElements(ChromeBrowser.Driver, page);                    
+            else if (drv.GetType().FullName.Contains("OpenQA.Selenium.Firefox.FirefoxDriver"))
+                PageFactory.InitElements(FireFoxBrowser.Driver, page);
+            else if(drv.GetType().FullName.Contains("OpenQA.Selenium.IE.InternetExplorerDriver"))
+                PageFactory.InitElements(IEBrowser.Driver, page);
             return page;
+        }
+
+        public static IWebDriver OnWhichBrowser(this IWebDriver driver)
+        {
+            drv = driver;
+            return drv;
         }
 
         public static Login LoginPage

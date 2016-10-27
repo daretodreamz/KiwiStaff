@@ -18,8 +18,7 @@ namespace AimyTest.TestSuits
 
         public ClassBooking_Testcases()
         {
-            driver = ChromeBrowser.chromeDriver;
-            ChromeBrowser.Initialize();
+            driver = ChromeBrowser.chromeDriver;            
         }
 
         [Test]
@@ -36,8 +35,6 @@ namespace AimyTest.TestSuits
             Pages.ClassBookingPage.ClassBookingWizard(driver, new string[] { "2016-10-10" }, false, true);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             Assert.AreEqual(true, Pages.BookingManagerPage.ValidationPendingBookingExist(driver, "Test Aimy"));
-            
-
         }
 
         [Test]

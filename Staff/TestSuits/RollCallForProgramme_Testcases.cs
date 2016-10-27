@@ -3,6 +3,7 @@ using AimyTest.Tablet;
 using AimyTest.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using System.Collections.Generic;
 
 namespace AimyTest.TestSuits
 {
@@ -11,28 +12,48 @@ namespace AimyTest.TestSuits
         public static readonly log4net.ILog log = LogHelper.GetLogger();
         private IWebDriver driver = null;
 
-        public RollCallForProgramme_Testcases()
-        {
-            driver = ChromeBrowser.chromeDriver;
-            ChromeBrowser.Initialize();            
-        }
+        //public RollCallForProgramme_Testcases()
+        //{
+        //    driver = ChromeBrowser.chromeDriver;
+        //    ChromeBrowser.Initialize();            
+        //}
 
-        [Test]
-        public void Roll_call_for_Program_TC01()
+        public void Init(string browserName)
         {
+            if (browserName.Equals("Chrome"))
+            {
+                driver = ChromeBrowser.chromeDriver;
+            }
+            else if (browserName.Equals("IE"))
+            {
+                driver = IEBrowser.IEDriver;
+            }
+            else if (browserName.Equals("FireFox"))
+            {
+                driver = FireFoxBrowser.firefoxDriver;
+            }
+        }
+        
+        [TestCase("Chrome")]
+        [TestCase("IE")]
+        [TestCase("FireFox")]
+        public void Roll_call_for_Program_TC01(string browserName)
+        {
+            Init(browserName);
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
-            ChromeBrowser.Goto("Mobile");
+            driver.Navigate().GoToUrl("http://uat.aimy.co.nz/Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnDriverPickup(driver, Mobile.GreenRedOptions.Green, "EA.4 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.4 Extra Inv A"));
             //Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendancePickedup(driver, "EA.4 Extra Inv A"));
-            ChromeBrowser.Goto("Mobile");
+            driver.Navigate().GoToUrl("http://uat.aimy.co.nz/Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignIn(driver, Mobile.GreenRedOptions.Green, "EA.4 Extra Inv A", Mobile.ProgrammesOptions.ASC));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.4 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.IsAttendanceSignedIn(driver, "EA.4 Extra Inv A", Mobile.ProgrammesOptions.ASC));
-            ChromeBrowser.Goto("Mobile");
+            driver.Navigate().GoToUrl("http://uat.aimy.co.nz/Mobile");
             Common.TitleValidation(driver, "Validate Aimy Tablet Home Page Title", "aimy plus");
             Assert.AreEqual(true, Pages.MobilePage.ClickOnSignOut(driver, "EA.4 Extra Inv A"));
             Assert.AreEqual(true, Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term4", "EA.4 Extra Inv A"));

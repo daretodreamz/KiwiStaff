@@ -25,7 +25,15 @@ namespace AimyTest.Browsers
 
         public static IWebDriver IEDriver
         {
-            get { return webDriver; }
+            get
+            {
+                if (webDriver == null)
+                {
+                    Initialize();
+                    return webDriver;
+                }
+                return webDriver;
+            }
         }
 
         public static string Title

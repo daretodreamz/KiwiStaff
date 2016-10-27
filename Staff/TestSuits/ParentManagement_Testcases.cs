@@ -22,7 +22,6 @@ namespace AimyTest.TestSuits
         public ParentManagement_Testcases()
         {
             driver = ChromeBrowser.chromeDriver;
-            ChromeBrowser.Initialize();
         }
 
         [Test]

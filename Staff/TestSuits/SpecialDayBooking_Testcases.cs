@@ -13,7 +13,6 @@ namespace AimyTest.TestSuits
         public SpecialDayBooking_Testcases()
         {
             driver = ChromeBrowser.chromeDriver;
-            ChromeBrowser.Initialize();
         }
 
         [Test]

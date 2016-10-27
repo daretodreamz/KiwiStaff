@@ -5,23 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 
 namespace AimyTest.Browsers
 {
     public static class ChromeBrowser
     {
         private static string baseUrl = Utilities.GlobalVariable.sURL;
+        
         private static IWebDriver webDriver = new ChromeDriver();
 
-        public static IWebDriver chromeDriver
-        {
-            get { return webDriver; }
-        }
-
-        public static void Initialize()
+        private static void Initialize()
         {
             Goto("");
         }
+
+        public static IWebDriver chromeDriver
+        {
+            get
+            {
+                Initialize();
+                return webDriver;
+            }
+        }        
 
         public static string Title
         {
