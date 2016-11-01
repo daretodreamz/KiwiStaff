@@ -19,7 +19,7 @@ namespace AimyTest.Transaction_History
         [FindsBy(How = How.XPath, Using = "html/body/div[3]/div/div[2]/ul/li[4]/a")]
         private IWebElement tabCreditNote { get; set; }
 
-        private int PositionRecordOnCreditNotePage(IWebDriver driver, string whichParent, string whichDate)
+        private int LocateRecordOnCreditNotePage(IWebDriver driver, string whichParent, string whichDate)
         {                                                    
             var elementsName = driver.FindElements(By.XPath("html/body/div[3]/div/div[2]/div[4]/div/div/div[2]/table/tbody/tr/td[6]"));
             var elementsDate = driver.FindElements(By.XPath("html/body/div[3]/div/div[2]/div[4]/div/div/div[2]/table/tbody/tr/td[9]"));
@@ -39,7 +39,7 @@ namespace AimyTest.Transaction_History
             return -1;
         }
 
-        private int PositionRecordOnInvoicePage(IWebDriver driver, string whichParent, string whichDate)
+        private int LocateRecordOnInvoicePage(IWebDriver driver, string whichParent, string whichDate)
         {                                                    
             var elementsName = driver.FindElements(By.XPath("html/body/div[3]/div/div[2]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[6]"));
             var elementsDate = driver.FindElements(By.XPath("html/body/div[3]/div/div[2]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[12]"));
@@ -64,7 +64,7 @@ namespace AimyTest.Transaction_History
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
             AimyClick(driver, tabCreditNote);
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            int i = PositionRecordOnCreditNotePage(driver, whichParent, whichDate);
+            int i = LocateRecordOnCreditNotePage(driver, whichParent, whichDate);
             if (i == -1) throw new Exception("There is NOT any items available, Please check!");
             if (null != driver.FindElement(By.XPath("html/body/div[3]/div/div[2]/div[4]/div/div/div[2]/table/tbody/tr[" + i + "]/td[8]")))
                 return true;
@@ -74,7 +74,7 @@ namespace AimyTest.Transaction_History
         public bool CheckExtraInvoice(IWebDriver driver, string whichParent, string whichDate)
         {
             Common.WaitBySleeping(GlobalVariable.iShortWait * 20);
-            int i = PositionRecordOnInvoicePage(driver, whichParent, whichDate);
+            int i = LocateRecordOnInvoicePage(driver, whichParent, whichDate);
             if (i == -1) throw new Exception("There is NOT any items available, Please check!");
             if (null != driver.FindElement(By.XPath("html/body/div[3]/div/div[2]/div[1]/div/div[1]/div[2]/table/tbody/tr[" + i + "]/td[10]")))
                 return true;
