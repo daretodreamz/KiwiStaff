@@ -152,9 +152,11 @@
     <Compile Include="Tablet\SignOut\Canvas.cs" />
     <Compile Include="Tablet\SignOut\ChildSignOut.cs" />
     <Compile Include="Tablet\SignOut\SignYourChildOut.cs" />
+    <Compile Include="TermProgrammes\CreateTermProgramPage.cs" />
     <Compile Include="TestSuits\ClassBooking_Testcases.cs" />
     <Compile Include="TestSuits\HolidayProgrammeBooking_Testcases.cs" />
     <Compile Include="TestSuits\ParentManagement_Testcases.cs" />
+    <Compile Include="TestSuits\ProgrammesLibrary_Testcases.cs" />
     <Compile Include="TestSuits\RollCallForProgramme_Testcases.cs" />
     <Compile Include="TestSuits\SpecialDayBooking_Testcases.cs" />
     <Compile Include="TestSuits\TestBase.cs" />
