@@ -98,6 +98,43 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Restore a parent")]
+        public virtual void RestoreAParent()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Restore a parent", ((string[])(null)));
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
+ testRunner.Given("Goto Parent management Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
+ testRunner.And("Open Archive list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ParentName"});
+            table3.AddRow(new string[] {
+                        "Bobo, Tianna"});
+#line 21
+ testRunner.And("get the parent name", ((string)(null)), table3, "And ");
+#line 24
+ testRunner.When("I have clicked on Restore button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 25
+ testRunner.Then("Parent is moved to Management tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Username",
+                        "Password"});
+            table4.AddRow(new string[] {
+                        "1222@gmail.com",
+                        "123123"});
+#line 26
+ testRunner.And("Parent can log in to Aimy by the following credentials", ((string)(null)), table4, "And ");
+#line 29
+ testRunner.And("Parent can make a booking", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

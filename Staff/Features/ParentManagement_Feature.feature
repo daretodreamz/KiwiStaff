@@ -14,3 +14,16 @@ Scenario: Archive a parent
 	Then Parent cannot log in to Aimy by the following credentials
 	| Username   | Password |
 	| ravito@yahoo.co.in | 123123 |
+
+Scenario: Restore a parent
+	Given Goto Parent management Page
+	And Open Archive list
+	And get the parent name
+	| ParentName |
+	| Bobo, Tianna |
+	When I have clicked on Restore button
+	Then Parent is moved to Management tab
+	And Parent can log in to Aimy by the following credentials
+	| Username   | Password |
+	| 1222@gmail.com | 123123 |
+	And Parent can make a booking

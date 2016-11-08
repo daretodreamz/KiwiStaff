@@ -62,5 +62,49 @@ namespace AimyTest.Steps
                 Pages.ParentManagementPage.LoginParentPortalDefault(driver, uname, upass.ToString(), false));
             }         
         }
+
+        [Given(@"Open Archive list")]
+        public void GivenOpenArchiveList()
+        {
+            Pages.ParentManagementPage.GoToAchivePage(driver);            
+        }
+
+        [When(@"I have clicked on Restore button")]
+        public void WhenIHaveClickedOnRestoreButton()
+        {
+            Assert.AreEqual(true, Pages.ParentManagementPage.FindTheParent(driver, pn));
+            Pages.ParentManagementPage.RestoreArchivedParent(driver, pn);
+        }
+
+        [Then(@"Parent is moved to Management tab")]
+        public void ThenParentIsMovedToManagementTab()
+        {
+            Assert.AreEqual(true,
+                 Pages.ParentManagementPage.IsParentBeenRestoredFromAchiveList(driver, pn));
+            Assert.AreEqual(true,
+                Pages.ParentManagementPage.IsParentBeenRestoredToParentManagePage(driver, pn));
+        }
+
+        [Then(@"Parent can log in to Aimy by the following credentials")]
+        public void ThenParentCanLogInToAimyByTheFollowingCredentials(Table table)
+        {
+            Pages.ParentManagementPage.LogoutAdminPort(driver);
+            Common.WaitBySleeping(GlobalVariable.iShortWait);
+            IEnumerable<dynamic> credentials = table.CreateDynamicSet();
+            foreach (var users in credentials)
+            {
+                string uname = users.Username;
+                int upass = users.Password;
+                Assert.AreEqual(true,
+                Pages.ParentManagementPage.LoginParentPortalDefault(driver, uname, upass.ToString()));
+            }
+        }
+
+        [Then(@"Parent can make a booking")]
+        public void ThenParentCanMakeABooking()
+        {
+            Pages.ParentDashBoardPage.DoBookingForChild(driver);
+            Assert.AreEqual(true, Pages.BookingPage.BookingWizard(driver));
+        }
     }
 }

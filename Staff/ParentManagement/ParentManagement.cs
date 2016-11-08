@@ -136,7 +136,7 @@ namespace AimyTest.Parent_Management
                     "Login - AIMY");
                 return ActualResutl;
             }
-            ActualResutl = driver.FindElement(By.XPath("html/body/div[3]/div/h2")).Text.Equals("Dashboard");
+            ActualResutl = driver.Title.Equals("Dashboard - aimy plus");
             return ActualResutl;
         }
 

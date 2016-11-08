@@ -18,13 +18,13 @@ namespace AimyTest.Booking_Pages_BSC_ASC
         
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
-        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div/div[2]/div/div/div[1]/div[2]/table[1]/tbody/tr/td/div/div[1]/div[1]")]
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div[1]/div[2]/div/div/div[1]/div/div[2]/div[2]/div/div/div[1]/div[2]/div/div/div[1]")]
         private IWebElement sourceElement { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div/div[2]/div/div/div[1]/div[3]/table/tbody/tr[1]/td[1]")]
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div[1]/div[2]/div/div/div[2]/div/div[1]/div/table/tbody/tr/td[1]")]
         private IWebElement destinationElement { get; set; }
-
-        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div/div[2]/div/div/div[1]/div[6]/div/button[1]")]
+                                   
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div[1]/div[2]/div/div/div[1]/div/div[2]/div[5]/div/button[1]")]
         private IWebElement btnProceed { get; set; }       
 
         public BookingPages_Wizard5 StepsForBookingWizard4(IWebDriver driver)
