@@ -16,8 +16,8 @@ namespace AimyTest.Booking_Pages_BSC_ASC
         
         private readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
 
-        // select one of the children
-        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div/div[4]/div/div[1]/div[4]/button[2]")]
+        // select one of the children      
+        [FindsBy(How = How.XPath, Using = "html/body/div[3]/div[4]/div[1]/div[4]/div/div[1]/div[4]/button[2]")]
         private IWebElement btnFinish { get; set; }
 
         private void DoScrollTo(IWebDriver driver, By by)
@@ -30,7 +30,7 @@ namespace AimyTest.Booking_Pages_BSC_ASC
             // need to wait for the page fully loaded
             IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(3000));
             wait.Until(drv => ((IJavaScriptExecutor)drv).ExecuteScript("return document.readyState").Equals("complete"));
-            DoScrollTo(driver, By.XPath("html/body/div[3]/div[4]/div/div[4]/div/div[1]/div[4]/button[2]"));
+            DoScrollTo(driver, By.XPath("html/body/div[3]/div[4]/div[1]/div[4]/div/div[1]/div[4]/button[2]"));
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             AimyClick(driver, btnFinish);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
