@@ -48,6 +48,11 @@ namespace AimyTest
             return drv;
         }
 
+        public static IWebDriver GetDriver()
+        {
+            return drv;
+        }
+
         public static Login LoginPage
         {
             get { return GetPage<Login>(); }

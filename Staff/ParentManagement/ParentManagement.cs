@@ -62,7 +62,7 @@ namespace AimyTest.Parent_Management
         {
             log.Info("Parents Mangement Validation Test Case: ");
 
-            if (driver.Title == sTitle)
+            if (driver.Title == sTitle || driver.Title == "Terms And Conditions - aimy plus")
             {
                 log.Info("[PASS] " + TestName);
                 log.Info("driver.Title: " + "'" + driver.Title + "'" + " sTitle: " + "'" + sTitle + "'");
@@ -114,19 +114,19 @@ namespace AimyTest.Parent_Management
             Pages.LogOutPage.LogOutAimy(driver);
         }
 
-        public bool LoginParentPortalDefault(IWebDriver driver, string ParentLoginEmail, bool LoginFlag = true, string NewPassword = "12341234")
+        public bool LoginParentPortalDefault(IWebDriver driver, string ParentLoginEmail, string Password, bool LoginFlag = true)
         {
             bool ActualResutl = false;
             driver.Navigate().GoToUrl(GlobalVariable.sURL);
             Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
-            if (String.IsNullOrEmpty(NewPassword))
+            if (Password.Equals(GlobalVariable.sloginPassword))
             {
                 
                 Pages.LoginPage.LoginAimy(driver, ParentLoginEmail, GlobalVariable.sloginPassword);
             }
             else
             {
-                Pages.LoginPage.LoginAimy(driver, ParentLoginEmail, NewPassword);
+                Pages.LoginPage.LoginAimy(driver, ParentLoginEmail, Password);
             }
             
             Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);

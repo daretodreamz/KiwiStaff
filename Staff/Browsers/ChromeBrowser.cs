@@ -24,7 +24,8 @@ namespace AimyTest.Browsers
         {
             get
             {
-                Initialize();
+                if (webDriver == null)
+                    Initialize();
                 return webDriver;
             }
         }        

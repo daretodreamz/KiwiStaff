@@ -33,7 +33,7 @@ namespace AimyTest.TestSuits
             Pages.ParentManagementPage.LogoutAdminPort(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             Assert.AreEqual(true,
-                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "ravito@yahoo.co.in", false));
+                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "ravito@yahoo.co.in", "123123", false));
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace AimyTest.TestSuits
             Pages.ParentManagementPage.LogoutAdminPort(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             Assert.AreEqual(true,
-                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com", false));
+                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com", "123123", false));
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace AimyTest.TestSuits
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             Pages.ParentManagementPage.LogoutAdminPort(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
-            Assert.AreEqual(true, Pages.ParentManagementPage.LoginParentPortalDefault(driver, "ema@gmail.com", false));
+            Assert.AreEqual(true, Pages.ParentManagementPage.LoginParentPortalDefault(driver, "ema@gmail.com", "123123", false));
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace AimyTest.TestSuits
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             //// Try to login to the restored parent account
             Assert.AreEqual(true,
-                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com"));
+                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com", "123123"));
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             Pages.ParentDashBoardPage.DoBookingForChild(driver);
             Assert.AreEqual(true, Pages.BookingPage.BookingWizard(driver));
@@ -156,7 +156,7 @@ namespace AimyTest.TestSuits
             Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
             //// Try to login to the restored parent account
             Assert.AreEqual(true,
-                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com"));
+                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com", "123123"));
             Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
 
             Pages.ParentDashBoardPage.DoBookingForChild(driver);
@@ -202,7 +202,7 @@ namespace AimyTest.TestSuits
             Pages.ParentManagementPage.LogoutAdminPort(driver);
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             //Try to login to the restored parent account
-            Assert.AreEqual(true, Pages.ParentManagementPage.LoginParentPortalDefault(driver, "ema@gmail.com"));
+            Assert.AreEqual(true, Pages.ParentManagementPage.LoginParentPortalDefault(driver, "ema@gmail.com", "123123"));
             Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
 
             Pages.ParentDashBoardPage.DoBookingForChild(driver);
@@ -227,7 +227,7 @@ namespace AimyTest.TestSuits
             Common.WaitBySleeping(GlobalVariable.iShortWait);
             // Try to login to the restored parent account
             Assert.AreEqual(true,
-                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com"));
+                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com", "123123"));
             Common.WaitBySleeping(GlobalVariable.iShortWait);
 
             Pages.ParentDashBoardPage.DoBookingForChild(driver);
@@ -277,7 +277,7 @@ namespace AimyTest.TestSuits
             Thread.Sleep(3000);
             Pages.ParentManagementPage.LogoutAdminPort(driver);
             Assert.AreEqual(true,
-                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com"));
+                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com", "123123"));
         }
 
         [Test]
@@ -301,7 +301,7 @@ namespace AimyTest.TestSuits
             Thread.Sleep(3000);
             Pages.ParentManagementPage.LogoutAdminPort(driver);
             Assert.AreEqual(true,
-                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com", true, "12341234"));
+                Pages.ParentManagementPage.LoginParentPortalDefault(driver, "dfaf1bb4-0@delete.auto.com", "12341234",true));
         }
     }
 }
