@@ -15,8 +15,19 @@ namespace AimyTest.Steps
     public sealed class ParentManagement_Steps
     {
         public static readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
-        private IWebDriver driver = Pages.GetDriver();
-        private string pn = null;
+        private readonly IWebDriver driver;
+        private readonly ScenarioContext scenarioContext;
+
+        public ParentManagement_Steps(ScenarioContext scenarioContext)
+        {
+            if (scenarioContext == null)
+            {
+                throw new ArgumentNullException("scenarioContext");
+            }
+
+            this.scenarioContext = scenarioContext;
+            this.driver = this.scenarioContext["DriverContext"] as IWebDriver;
+        }
 
         [Given(@"Goto Parent management Page")]
         public void GivenGotoParentManagementPage()
@@ -30,14 +41,14 @@ namespace AimyTest.Steps
             IEnumerable<dynamic> names = table.CreateDynamicSet();
             foreach (var name in names)
             {
-                pn = name.ParentName;
+                this.scenarioContext.Set(name.ParentName, "ParentName");
             }
-    }
+        }
         
         [When(@"I have clicked on Archive button")]
         public void WhenIHaveClickedOnArchiveButton()
         {
-            Pages.ParentManagementPage.AchiveParent(driver, pn);
+            Pages.ParentManagementPage.AchiveParent(driver, scenarioContext.Get<String>("ParentName"));
             Common.WaitBySleeping(GlobalVariable.iShortWait);
         }
 
@@ -45,7 +56,7 @@ namespace AimyTest.Steps
         public void WhenParentIsMovedToArchiveTab()
         {
             Pages.ParentManagementPage.GoToAchivePage(driver);
-            Assert.AreEqual(true, Pages.ParentManagementPage.FindTheParent(driver, pn));
+            Assert.AreEqual(true, Pages.ParentManagementPage.FindTheParent(driver, scenarioContext.Get<String>("ParentName")));
         }
 
         [Then(@"Parent cannot log in to Aimy by the following credentials")]
@@ -72,17 +83,17 @@ namespace AimyTest.Steps
         [When(@"I have clicked on Restore button")]
         public void WhenIHaveClickedOnRestoreButton()
         {
-            Assert.AreEqual(true, Pages.ParentManagementPage.FindTheParent(driver, pn));
-            Pages.ParentManagementPage.RestoreArchivedParent(driver, pn);
+            Assert.AreEqual(true, Pages.ParentManagementPage.FindTheParent(driver, scenarioContext.Get<String>("ParentName")));
+            Pages.ParentManagementPage.RestoreArchivedParent(driver, scenarioContext.Get<String>("ParentName"));
         }
 
         [Then(@"Parent is moved to Management tab")]
         public void ThenParentIsMovedToManagementTab()
         {
             Assert.AreEqual(true,
-                 Pages.ParentManagementPage.IsParentBeenRestoredFromAchiveList(driver, pn));
+                 Pages.ParentManagementPage.IsParentBeenRestoredFromAchiveList(driver, scenarioContext.Get<String>("ParentName")));
             Assert.AreEqual(true,
-                Pages.ParentManagementPage.IsParentBeenRestoredToParentManagePage(driver, pn));
+                Pages.ParentManagementPage.IsParentBeenRestoredToParentManagePage(driver, scenarioContext.Get<String>("ParentName")));
         }
 
         [Then(@"Parent can log in to Aimy by the following credentials")]

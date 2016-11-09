@@ -13,7 +13,8 @@ namespace AimyTest.Helper
     public sealed class Hooks
     {
         private static readonly log4net.ILog log = Utilities.LogHelper.GetLogger();
-        private IWebDriver driver = null;
+        private readonly IWebDriver driver = ChromeBrowser.chromeDriver;
+        
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
         [BeforeScenario]
         public void BeforeScenario()
@@ -21,10 +22,10 @@ namespace AimyTest.Helper
             log.Info("---------------------------------------------------------------------");
             log.Info("Test Execution is started |  Start Time : " + DateTime.Now.ToString());
             log.Info("---------------------------------------------------------------------");
-            driver = ChromeBrowser.chromeDriver;
+            ScenarioContext.Current.Add("DriverContext", this.driver);
             Pages.OnWhichBrowser(driver);
             driver.Navigate().GoToUrl(GlobalVariable.sURL);
-            Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
+            Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);            
         }
 
         [AfterScenario]
