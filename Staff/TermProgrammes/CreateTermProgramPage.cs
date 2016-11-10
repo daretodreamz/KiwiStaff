@@ -10,7 +10,7 @@ namespace AimyTest.Term_programs
 {
 
     //This class is for testing "Add Term Program" function
-    class CreateTermProgramPage
+    public class CreateTermProgramPage
     {
         IWebDriver driver = null;
         public CreateTermProgramPage(IWebDriver _driver)
