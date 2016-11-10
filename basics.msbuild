@@ -7,7 +7,7 @@
    <TestResultsPath Include="BuildArtifacts\TestResults.xml" />
  </ItemGroup>
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <BuildPlatform Condition=" '$(BuildPlatform)' == '' ">Any CPU</BuildPlatform>
   </PropertyGroup>
  <Target Name="Init" DependsOnTargets="Clean">
