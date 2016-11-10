@@ -13,11 +13,13 @@ namespace AimyTest.TestSuits
         public SpecialDayBooking_Testcases()
         {
             driver = ChromeBrowser.chromeDriver;
+            driver.Navigate().GoToUrl(GlobalVariable.sURL);
         }
 
         [Test]
         public void SpecialDay_Booking_01_For_One_Child_One_Day()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
             ChromeBrowser.Goto("Parent/Management");

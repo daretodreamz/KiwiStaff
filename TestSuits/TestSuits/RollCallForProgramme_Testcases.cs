@@ -23,14 +23,17 @@ namespace AimyTest.TestSuits
             if (browserName.Equals("Chrome"))
             {
                 driver = ChromeBrowser.chromeDriver;
+                driver.Navigate().GoToUrl(GlobalVariable.sURL);
             }
             else if (browserName.Equals("IE"))
             {
                 driver = IEBrowser.IEDriver;
+                driver.Navigate().GoToUrl(GlobalVariable.sURL);
             }
             else if (browserName.Equals("FireFox"))
             {
                 driver = FireFoxBrowser.firefoxDriver;
+                driver.Navigate().GoToUrl(GlobalVariable.sURL);
             }
         }
         
@@ -40,8 +43,7 @@ namespace AimyTest.TestSuits
         public void Roll_call_for_Program_TC01(string browserName)
         {
             Init(browserName);
-            Pages.OnWhichBrowser(driver);
-            driver.Navigate().GoToUrl(GlobalVariable.sURL);
+            Pages.OnWhichBrowser(driver);            
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
             driver.Navigate().GoToUrl("http://uat.aimy.co.nz/Mobile");
@@ -64,6 +66,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void Roll_call_for_Program_TC02()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
             ChromeBrowser.Goto("Mobile");
@@ -86,6 +89,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void Roll_call_for_Program_TC03()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
             ChromeBrowser.Goto("Mobile");
@@ -106,6 +110,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void Roll_call_for_Program_TC04()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
             ChromeBrowser.Goto("Mobile");
@@ -122,6 +127,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void Roll_call_for_Program_TC05()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
             ChromeBrowser.Goto("Mobile");

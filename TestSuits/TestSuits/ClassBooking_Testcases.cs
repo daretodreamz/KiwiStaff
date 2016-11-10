@@ -18,12 +18,14 @@ namespace AimyTest.TestSuits
 
         public ClassBooking_Testcases()
         {
-            driver = ChromeBrowser.chromeDriver;            
+            driver = ChromeBrowser.chromeDriver;
+            driver.Navigate().GoToUrl(GlobalVariable.sURL);
         }
 
         [Test]
         public void Class_Booking_01_For_One_Child_One_Day_Each_Class()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, "bing@cssteam.co.nz", "123123");
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
             ChromeBrowser.Goto("Parent/Management");
@@ -40,6 +42,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void Class_Booking_02_For_Two_Children_One_Day_Each_Class()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, "bing@cssteam.co.nz", "123123");
             Common.TitleValidation(driver, "Validate Aimy Home Title", "Home - aimy plus");
             ChromeBrowser.Goto("Parent/Management");

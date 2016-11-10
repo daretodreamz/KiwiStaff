@@ -22,11 +22,13 @@ namespace AimyTest.TestSuits
         public ParentManagement_Testcases()
         {
             driver = ChromeBrowser.chromeDriver;
+            driver.Navigate().GoToUrl(GlobalVariable.sURL);
         }
 
         [Test]
         public void DEL_PARENT_01_Has_No_Children()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.ParentManagementPage.AchiveParent(driver, "Nakkala, Ravito");
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -39,6 +41,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void DEL_PARENT_02_Has_Some_Children()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.ParentManagementPage.AchiveParent(driver, "Attendance B, Hana");
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -51,6 +54,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void DEL_PARENT_03_Has_Some_Bookings()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.ParentManagementPage.AchiveParent(driver, "su, ema");
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -62,6 +66,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void DEL_CHILD_01_From_Parent()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Assert.AreEqual(true, Pages.ChildrenManagementPage.AchiveChildren(driver, "Casson, Fiona"));
         }
@@ -69,6 +74,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void DEL_CHILD_02_Has_Some_Pending_Booking()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Assert.AreEqual(true, Pages.BookingManagerPage.ValidationPendingBookingExist(driver, "Marlon Casson"));
             Assert.AreEqual(true, Pages.ChildrenManagementPage.AchiveChildren(driver, "Marlon Casson"));
@@ -77,6 +83,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void DEL_CHILD_03_Has_Some_Confirmed_Booking()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Assert.AreEqual(true, Pages.BookingManagerPage.ValidationConfirmedBookingExist(driver, "Tony Casson"));
             Assert.AreEqual(true, Pages.ChildrenManagementPage.AchiveChildren(driver, "Tony Casson"));
@@ -85,6 +92,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void DEL_CHILD_04_Has_Some_Attendance_Records()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.AttendanceManagerPage.ValidationAttendanceExist(driver, "term3", "Tony Casson");
             Pages.ChildrenManagementPage.AchiveChildren(driver, "Tony Casson");
@@ -93,6 +101,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void RES_PARENT_01_Has_No_Children()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.ParentManagementPage.AchiveParent(driver, "Nakkala, Ravito");
             Common.WaitBySleeping(Utilities.GlobalVariable.iShortWait);
@@ -113,6 +122,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void RES_PARENT_02_Has_No_Children_Do_Enrol_Do_Booking()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.ParentManagementPage.AchiveParent(driver, "Attendance B, Hana");
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -141,6 +151,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void RES_PARENT_03_Has_Some_Children_Do_Enrol_Do_Booking()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.ParentManagementPage.AchiveParent(driver, "Attendance B, Hana");
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -167,6 +178,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void DeleteBooking()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             if (Pages.BookingManagerPage.ValidationPendingBookingExist(driver, "dfaf1bb4-0@delete.auto.com")
                 .Equals(true))
@@ -190,6 +202,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void RES_PARENT_04_Has_Some_Children_Has_Some_Bookings_Do_Booking()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.ParentManagementPage.AchiveParent(driver, "ema su");
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -212,6 +225,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void RES_PARENT_05_Has_Some_Children_Has_Some_Invoices_Do_Booking()
         {
+            Pages.OnWhichBrowser(driver);
             Pages.LoginPage.LoginAimy(driver, GlobalVariable.sloginUsername, GlobalVariable.sloginPassword);
             Pages.ParentManagementPage.AchiveParent(driver, "Attendance B, Hana");
             Common.WaitBySleeping(GlobalVariable.iShortWait);
@@ -237,6 +251,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void PARENT_MGT_UNLOCK_01()
         {
+            Pages.OnWhichBrowser(driver);
             Assert.AreEqual(true,
                 Pages.LoginPage.LockUserWith10TimesInvalidPasswordInput(driver, "dfaf1bb4-0@delete.auto.com", "123",
                     "Input Valid username and Invalid Password"));
@@ -246,6 +261,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void PARENT_MGT_UNLOCK_02()
         {
+            Pages.OnWhichBrowser(driver);
             // To lock this user
             bool flag = Pages.LoginPage.LockUserWith10TimesInvalidPasswordInput(driver, "dfaf1bb4-0@delete.auto.com",
                 "123", "Input Valid username and Invalid Password");
@@ -262,6 +278,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void PARENT_MGT_UNLOCK_03()
         {
+            Pages.OnWhichBrowser(driver);
             // To lock this user
             bool flag = Pages.LoginPage.LockUserWith10TimesInvalidPasswordInput(driver, "dfaf1bb4-0@delete.auto.com",
                 "123", "Input Valid username and Invalid Password");
@@ -283,6 +300,7 @@ namespace AimyTest.TestSuits
         [Test]
         public void PARENT_MGT_UNLOCK_04()
         {
+            Pages.OnWhichBrowser(driver);
             // To lock this user
             bool flag = Pages.LoginPage.LockUserWith10TimesInvalidPasswordInput(driver, "dfaf1bb4-0@delete.auto.com",
                 "123", "Input Valid username and Invalid Password");

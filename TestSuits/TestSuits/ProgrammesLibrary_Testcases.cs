@@ -24,14 +24,17 @@ namespace AimyTest.TestSuits
             if (browserName.Equals("Chrome"))
             {
                 driver = ChromeBrowser.chromeDriver;
+                driver.Navigate().GoToUrl(GlobalVariable.sURL);
             }
             else if (browserName.Equals("IE"))
             {
                 driver = IEBrowser.IEDriver;
+                driver.Navigate().GoToUrl(GlobalVariable.sURL);
             }
             else if (browserName.Equals("FireFox"))
             {
                 driver = FireFoxBrowser.firefoxDriver;
+                driver.Navigate().GoToUrl(GlobalVariable.sURL);
             }
         }
 
