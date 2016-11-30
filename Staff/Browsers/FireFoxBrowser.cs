@@ -13,27 +13,27 @@ namespace AimyTest.Browsers
     {
         private static string baseUrl = Utilities.GlobalVariable.sURL;
         private static IWebDriver webDriver = null;
-        private static void Initialize()
-        {
-            FirefoxBinary ffbinary = new FirefoxBinary(@"C:\Program Files\Mozilla Firefox\firefox.exe");
-            FirefoxProfile ffprofile = new FirefoxProfile();
-            webDriver = new FirefoxDriver(ffbinary, ffprofile);
+        //private static void Initialize()
+        //{
+        //    FirefoxBinary ffbinary = new FirefoxBinary(@"C:\Program Files\Mozilla Firefox\firefox.exe");
+        //    FirefoxProfile ffprofile = new FirefoxProfile();
+        //    webDriver = new FirefoxDriver(ffbinary, ffprofile);
 
-            Goto("");
-        }
+        //    Goto("");
+        //}
 
-        public static IWebDriver firefoxDriver
-        {
-            get
-            {
-                if (webDriver == null)
-                {
-                    Initialize();
-                    return webDriver;
-                }
-                return webDriver;
-            }
-        }
+        //public static IWebDriver firefoxDriver
+        //{
+        //    get
+        //    {
+        //        if (webDriver == null)
+        //        {
+        //            Initialize();
+        //            return webDriver;
+        //        }
+        //        return webDriver;
+        //    }
+        //}
 
         public static string Title
         {

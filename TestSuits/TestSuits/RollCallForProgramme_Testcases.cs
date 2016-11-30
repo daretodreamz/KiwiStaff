@@ -32,8 +32,8 @@ namespace AimyTest.TestSuits
             }
             else if (browserName.Equals("FireFox"))
             {
-                driver = FireFoxBrowser.firefoxDriver;
-                driver.Navigate().GoToUrl(GlobalVariable.sURL);
+                //driver = FireFoxBrowser.firefoxDriver;
+                //driver.Navigate().GoToUrl(GlobalVariable.sURL);
             }
         }
         

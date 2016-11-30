@@ -36,7 +36,7 @@ namespace AimyTest
             if (drv.GetType().FullName.Contains("OpenQA.Selenium.Chrome.ChromeDriver"))          
                 PageFactory.InitElements(ChromeBrowser.Driver, page);                    
             else if (drv.GetType().FullName.Contains("OpenQA.Selenium.Firefox.FirefoxDriver"))
-                PageFactory.InitElements(FireFoxBrowser.Driver, page);
+                PageFactory.InitElements(drv, page);
             else if(drv.GetType().FullName.Contains("OpenQA.Selenium.IE.InternetExplorerDriver"))
                 PageFactory.InitElements(IEBrowser.Driver, page);
             return page;
