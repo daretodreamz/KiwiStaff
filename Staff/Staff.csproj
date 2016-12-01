@@ -135,12 +135,12 @@
     <Compile Include="Browsers\FireFoxBrowser.cs" />
     <Compile Include="Browsers\IEBrowser.cs" />
     <Compile Include="ChildrenManagement\ChildrenManagement.cs" />
-    <Compile Include="Features\ParentManagement_Feature.feature.cs">
+    <Compile Include="Specflow\Features\ParentManagement_Feature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ParentManagement_Feature.feature</DependentUpon>
     </Compile>
-    <Compile Include="Helper\Hooks.cs" />
+    <Compile Include="Specflow\Helper\Hooks.cs" />
     <Compile Include="ParentManagement\ParentManagement.cs" />
     <Compile Include="EditLogin\EditLogin.cs" />
     <Compile Include="Login_out\Login.cs" />
@@ -151,7 +151,7 @@
     <Compile Include="Parent_Dashboard\ParentDashBoard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Steps\ParentManagement_Steps.cs" />
+    <Compile Include="Specflow\Steps\ParentManagement_Steps.cs" />
     <Compile Include="Tablet\DriverPickup\ChildList.cs" />
     <Compile Include="Tablet\DriverPickup\SchoolList.cs" />
     <Compile Include="Tablet\Mobile.cs" />
@@ -172,7 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\ParentManagement_Feature.feature">
+    <None Include="Specflow\Features\ParentManagement_Feature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ParentManagement_Feature.feature.cs</LastGenOutput>
     </None>

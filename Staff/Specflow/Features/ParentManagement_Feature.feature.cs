@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace AimyTest.Features
+namespace AimyTest.Specflow.Features
 {
     using TechTalk.SpecFlow;
     
