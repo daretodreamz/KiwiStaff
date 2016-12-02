@@ -24,10 +24,22 @@ namespace AimyTest.Transaction_History
 
         private By totalRecordsOnCreditNotePage = By.XPath("html/body/div[3]/div/div[2]/div[4]/div/div/div[2]/table/tbody/tr");
 
+        private void HightLightingElement(IWebDriver driver, IWebElement element)
+        {
+            var originalStyle = element.GetAttribute("style");
+            var executor = driver as IJavaScriptExecutor;
+            executor.ExecuteScript("arguments[0].setAttribute(arguments[1], arguments[2])",
+                tabCreditNote, "style", "border: 2px solid red; border-style: dashed;");
+            executor.ExecuteScript("arguments[0].setAttribute(arguments[1], arguments[2])",
+                tabCreditNote, "style", originalStyle);
+        }
+
         public int CompareFirstThreeRecordsOnCreditNotePageWithDetail(IWebDriver driver)
         {
             Thread.Sleep(5000);
+            HightLightingElement(driver, tabCreditNote);
             AimyClick(driver, tabCreditNote);
+            
             Thread.Sleep(1000);
             int elements = driver.FindElements(totalRecordsOnCreditNotePage).Count;
             if (elements == 0)
